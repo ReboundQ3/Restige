@@ -111,6 +111,20 @@ namespace Content.Server.Database
                 .IsRequired();
             // END CD
 
+            // SV Records Start
+            modelBuilder.Entity<SVModel.SVProfile>()
+                .HasOne(p => p.Profile)
+                .WithOne(p => p.SVProfile)
+                .HasForeignKey<SVModel.SVProfile>(p => p.ProfileId)
+                .IsRequired();
+
+            modelBuilder.Entity<SVModel.CharacterRecordEntry>()
+                .HasOne(e => e.SVProfile)
+                .WithMany(e => e.CharacterRecordEntries)
+                .HasForeignKey(e => e.SVProfileId)
+                .IsRequired();
+            // SV Records End
+
             modelBuilder.Entity<Antag>()
                 .HasIndex(p => new {HumanoidProfileId = p.ProfileId, p.AntagName})
                 .IsUnique();
@@ -488,7 +502,8 @@ namespace Content.Server.Database
         public int PreferenceId { get; set; }
         public Preference Preference { get; set; } = null!;
 
-        public CDModel.CDProfile? CDProfile { get; set; }
+        public CDModel.CDProfile? CDProfile { get; set; } // CD Records
+        public SVModel.SVProfile? SVProfile { get; set; } // SV Records
     }
 
     public class Job
