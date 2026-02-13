@@ -9,7 +9,7 @@ namespace Content.Shared._SV.Records;
 /// </summary>
 [Serializable, NetSerializable]
 public sealed class FullCharacterRecords(
-    PlayerProvidedCharacterRecords pRecords,
+    PlayerProvidedRecords pRecords,
     uint? stationRecordsKey,
     string name,
     int age,
@@ -23,7 +23,7 @@ public sealed class FullCharacterRecords(
     EntityUid? owner = null)
 {
     [ViewVariables]
-    public PlayerProvidedCharacterRecords PRecords = pRecords;
+    public PlayerProvidedRecords PRecords = pRecords;
 
     /// <summary>
     /// Key for the equivalent entry in the station records

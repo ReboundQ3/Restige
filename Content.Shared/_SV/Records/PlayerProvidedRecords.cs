@@ -10,7 +10,7 @@ namespace Content.Shared._SV.Records;
 /// </summary>
 [DataDefinition]
 [Serializable, NetSerializable]
-public sealed partial class PlayerProvidedCharacterRecords
+public sealed partial class PlayerProvidedRecords
 {
     public const int TextMedLen = 64;
     public const int TextVeryLargeLen = 4096;
@@ -96,7 +96,7 @@ public sealed partial class PlayerProvidedCharacterRecords
         }
     }
 
-    public PlayerProvidedCharacterRecords(
+    public PlayerProvidedRecords(
         bool hasWorkAuthorization,
         int height, int weight,
         string emergencyContactName,
@@ -122,7 +122,7 @@ public sealed partial class PlayerProvidedCharacterRecords
         AdminEntries = adminEntries;
     }
 
-    public PlayerProvidedCharacterRecords(PlayerProvidedCharacterRecords other)
+    public PlayerProvidedRecords(PlayerProvidedRecords other)
     {
         Height = other.Height;
         Weight = other.Weight;
@@ -138,9 +138,9 @@ public sealed partial class PlayerProvidedCharacterRecords
         AdminEntries = other.AdminEntries.Select(x => new RecordEntry(x)).ToList();
     }
 
-    public static PlayerProvidedCharacterRecords DefaultRecords()
+    public static PlayerProvidedRecords DefaultRecords()
     {
-        return new PlayerProvidedCharacterRecords(
+        return new PlayerProvidedRecords(
             hasWorkAuthorization: true,
             height: 170, weight: 70,
             emergencyContactName: "",
@@ -155,7 +155,7 @@ public sealed partial class PlayerProvidedCharacterRecords
         );
     }
 
-    public bool MemberwiseEquals(PlayerProvidedCharacterRecords other)
+    public bool MemberwiseEquals(PlayerProvidedRecords other)
     {
         // This is ugly but is only used for integration tests.
         var test = Height == other.Height
@@ -246,52 +246,52 @@ public sealed partial class PlayerProvidedCharacterRecords
         EnsureValidEntries(SecurityEntries);
         EnsureValidEntries(AdminEntries);
     }
-    public PlayerProvidedCharacterRecords WithHeight(int height)
+    public PlayerProvidedRecords WithHeight(int height)
     {
         return new(this) { Height = height };
     }
-    public PlayerProvidedCharacterRecords WithWeight(int weight)
+    public PlayerProvidedRecords WithWeight(int weight)
     {
         return new(this) { Weight = weight };
     }
-    public PlayerProvidedCharacterRecords WithWorkAuth(bool auth)
+    public PlayerProvidedRecords WithWorkAuth(bool auth)
     {
         return new(this) { HasWorkAuthorization = auth };
     }
-    public PlayerProvidedCharacterRecords WithContactName(string name)
+    public PlayerProvidedRecords WithContactName(string name)
     {
         return new(this) { EmergencyContactName = name};
     }
-    public PlayerProvidedCharacterRecords WithIdentifyingFeatures(string feat)
+    public PlayerProvidedRecords WithIdentifyingFeatures(string feat)
     {
         return new(this) { IdentifyingFeatures = feat};
     }
-    public PlayerProvidedCharacterRecords WithAllergies(string s)
+    public PlayerProvidedRecords WithAllergies(string s)
     {
         return new(this) { Allergies = s };
     }
-    public PlayerProvidedCharacterRecords WithDrugAllergies(string s)
+    public PlayerProvidedRecords WithDrugAllergies(string s)
     {
         return new(this) { DrugAllergies = s };
     }
-    public PlayerProvidedCharacterRecords WithPostmortemInstructions(string s)
+    public PlayerProvidedRecords WithPostmortemInstructions(string s)
     {
         return new(this) { PostmortemInstructions = s};
     }
-    public PlayerProvidedCharacterRecords WithEmploymentEntries(List<RecordEntry> entries)
+    public PlayerProvidedRecords WithEmploymentEntries(List<RecordEntry> entries)
     {
         return new(this) { EmploymentEntries = entries};
     }
-    public PlayerProvidedCharacterRecords WithMedicalEntries(List<RecordEntry> entries)
+    public PlayerProvidedRecords WithMedicalEntries(List<RecordEntry> entries)
     {
         return new(this) { MedicalEntries = entries};
     }
-    public PlayerProvidedCharacterRecords WithSecurityEntries(List<RecordEntry> entries)
+    public PlayerProvidedRecords WithSecurityEntries(List<RecordEntry> entries)
     {
         return new(this) { SecurityEntries = entries};
     }
 
-    public PlayerProvidedCharacterRecords WithAdminEntries(List<RecordEntry> entries)
+    public PlayerProvidedRecords WithAdminEntries(List<RecordEntry> entries)
     {
         return new (this) { AdminEntries = entries };
     }

@@ -19,6 +19,9 @@ using Robust.Shared.Utility;
 // CD: Imports
 using Content.Shared._CD.Records;
 
+// SV: Imports
+using Content.Shared._SV.Records;
+
 namespace Content.Shared.Preferences
 {
     /// <summary>
@@ -135,6 +138,9 @@ namespace Content.Shared.Preferences
         [DataField("cosmaticDriftCharacterRecords")]
         public PlayerProvidedCharacterRecords? CDCharacterRecords;
 
+        [DataField("sectorVestigeCharacterRecords")]
+        public PlayerProvidedRecords? SVCharacterRecords;
+
         public HumanoidCharacterProfile(
             string name,
             string flavortext,
@@ -150,7 +156,8 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
-            PlayerProvidedCharacterRecords? cdCharacterRecords)
+            PlayerProvidedCharacterRecords? cdCharacterRecords,
+            PlayerProvidedRecords? svCharacterRecords)
         {
             Name = name;
             FlavorText = flavortext;
@@ -167,6 +174,7 @@ namespace Content.Shared.Preferences
             _traitPreferences = traitPreferences;
             _loadouts = loadouts;
             CDCharacterRecords = cdCharacterRecords;
+            SVCharacterRecords = svCharacterRecords;
 
             var hasHighPrority = false;
             foreach (var (key, value) in _jobPriorities)
@@ -199,7 +207,8 @@ namespace Content.Shared.Preferences
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
-                other.CDCharacterRecords)
+                other.CDCharacterRecords,
+                other.SVCharacterRecords)
         {
         }
 
@@ -479,6 +488,11 @@ namespace Content.Shared.Preferences
             return new HumanoidCharacterProfile(this) { CDCharacterRecords = records };
         }
 
+        public HumanoidCharacterProfile WithSVCharacterProfile(PlayerProvidedRecords records)
+        {
+            return new HumanoidCharacterProfile(this) { SVCharacterRecords = records };
+        }
+
         public string Summary =>
             Loc.GetString(
                 "humanoid-character-profile-summary",
@@ -505,6 +519,8 @@ namespace Content.Shared.Preferences
             if (FlavorText != other.FlavorText) return false;
             if (CDCharacterRecords != null && other.CDCharacterRecords != null &&
                 !CDCharacterRecords.MemberwiseEquals(other.CDCharacterRecords)) return false;
+            if (SVCharacterRecords != null && other.SVCharacterRecords != null &&
+                !SVCharacterRecords.MemberwiseEquals(other.SVCharacterRecords)) return false;
             return Appearance.MemberwiseEquals(other.Appearance);
         }
 
@@ -667,6 +683,15 @@ namespace Content.Shared.Preferences
             else
             {
                 CDCharacterRecords!.EnsureValid();
+            }
+
+            if (SVCharacterRecords == null)
+            {
+                SVCharacterRecords = PlayerProvidedRecords.DefaultRecords();
+            }
+            else
+            {
+                SVCharacterRecords!.EnsureValid();
             }
 
             // Checks prototypes exist for all loadouts and dump / set to default if not.

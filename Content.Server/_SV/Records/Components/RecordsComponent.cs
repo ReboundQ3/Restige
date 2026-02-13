@@ -1,4 +1,5 @@
 using Content.Shared._SV.Records;
+using Content.Server._SV.Records.Components;
 
 namespace Content.Server._SV.Records.Components;
 
@@ -7,7 +8,7 @@ namespace Content.Server._SV.Records.Components;
 /// </summary>
 [RegisterComponent]
 [Access(typeof(RecordsSystem))]
-public sealed partial class CharacterRecordsComponent : Component
+public sealed partial class RecordsComponent : Component
 {
     [ViewVariables(VVAccess.ReadOnly)]
     public Dictionary<uint, FullCharacterRecords> Records = new();
