@@ -1405,3 +1405,9 @@ Entries:
       message: Added AP .35 auto cartridges.
   id: 192
   time: '2026-02-09T17:54:11.0000000+00:00'
+- author: Mixmaster49
+  changes:
+    - type: Remove
+      message: Removed the asteroid event from the Vestige Extended scheduler
+  id: 193
+  time: '2026-02-14T13:28:52.0000000+00:00'
