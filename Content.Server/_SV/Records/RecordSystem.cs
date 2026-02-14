@@ -1,10 +1,12 @@
-using Content.Server._SV.Records.Components;
-using Content.Shared._SV.Records;
 using Content.Server.StationRecords.Systems;
+using Content.Server.StationRecords;
+using Content.Shared.Inventory;
+using Content.Shared.PDA;
+using Content.Shared.Roles;
+using Content.Shared.StationRecords;
+using Content.Shared._SV.Records;
 using Content.Shared.Forensics.Components;
 using Content.Shared.GameTicking;
-using Content.Shared.Inventory;
-using Content.Shared.StationRecords;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._SV.Records;
@@ -34,7 +36,7 @@ public sealed class RecordsSystem : EntitySystem
             AddComp<RecordsComponent>(args.Station);
         if (string.IsNullOrEmpty(args.JobId))
         {
-            Log.Error($"Null JobId in CharacterRecordsSystem::OnPlayerSpawn for character {args.Profile.Name} played by {args.Player.Name}");
+            Log.Error($"Null JobId in RecordsSystem::OnPlayerSpawn for character {args.Profile.Name} played by {args.Player.Name}");
             return;
         }
 
@@ -86,5 +88,74 @@ public sealed class RecordsSystem : EntitySystem
             owner: player);
         AddRecord(args.Station, args.Mob, records);
     }
+
+    private StationRecordKey? FindStationRecordsKey(EntityUid uid)
+    {
+        if (!_inventory.TryGetSlotEntity(uid, "id", out var idUid))
+            return null;
+
+        var keyStorageEntity = idUid;
+        if (TryComp<PdaComponent>(idUid, out var pda) && pda.ContainedId is { } id)
+        {
+            keyStorageEntity = id;
+        }
+
+        if (!TryComp<StationRecordKeyStorageComponent>(keyStorageEntity, out var storage))
+        {
+            return null;
+        }
+
+        return storage.Key;
+    }
+
+    private void AddRecord(EntityUid station, EntityUid player, FullCharacterRecords records, RecordsComponent? recordsDb = null)
+    {
+        if (!Resolve(station, ref recordsDb))
+            return;
+
+        var key = recordsDb.CreateNewKey();
+        recordsDb.Records.Add(key, records);
+        var playerKey = new RecordKey { Station = station, Index = key };
+        AddComp(player, new RecordKeyStorageComponent(playerKey));
+
+        RaiseLocalEvent(station, new RecordsModifiedEvent());
+    }
+
+    private void DelRecord(EntityUid station, EntityUid player, RecordType type, int index, RecordKeyStorageComponent? key, RecordsComponent? recordsDb)
+    {
+        if (!Resolve(station, ref recordsDb) || !Resolve(player, ref key))
+            return;
+
+        if (!recordsDb.Records.TryGetValue(key.Key.Index, out var value))
+            return;
+
+        var record = value.PRecords;
+
+        switch (type)
+        {
+            case RecordType.Employment:
+                record.EmploymentEntries.RemoveAt(index);
+                break;
+            case RecordType.Medical:
+                record.MedicalEntries.RemoveAt(index);
+                break;
+            case RecordType.Security:
+                record.SecurityEntries.RemoveAt(index);
+                break;
+            case RecordType.CentComm:
+                record.CentCommEntries.RemoveAt(index);
+                break;
+        }
+    }
+
+    private IDictionary<uint, FullCharacterRecords> GetRecord(EntityUid station, RecordsComponent? recordsDb = null)
+    {
+        if (!Resolve(station, ref recordsDb))
+            return new Dictionary<uint, FullCharacterRecords>();
+
+        return recordsDb.Records;
+    }
+
+    public sealed class RecordsModifiedEvent : EntityEventArgs;
 }
 

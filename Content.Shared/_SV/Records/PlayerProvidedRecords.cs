@@ -56,6 +56,8 @@ public sealed partial class PlayerProvidedRecords
     [DataField, JsonIgnore]
     public List<RecordEntry> EmploymentEntries { get; private set; }
     [DataField, JsonIgnore]
+    public List<RecordEntry> CentCommEntries { get; private set;}
+    [DataField, JsonIgnore]
     public List<RecordEntry> AdminEntries { get; private set; }
 
     [DataDefinition]
@@ -106,6 +108,7 @@ public sealed partial class PlayerProvidedRecords
         List<RecordEntry> medicalEntries,
         List<RecordEntry> securityEntries,
         List<RecordEntry> employmentEntries,
+        List<RecordEntry> centcommEntries,
         List<RecordEntry> adminEntries)
     {
         HasWorkAuthorization = hasWorkAuthorization;
@@ -119,6 +122,7 @@ public sealed partial class PlayerProvidedRecords
         MedicalEntries = medicalEntries;
         SecurityEntries = securityEntries;
         EmploymentEntries = employmentEntries;
+        CentCommEntries = centcommEntries;
         AdminEntries = adminEntries;
     }
 
@@ -135,6 +139,7 @@ public sealed partial class PlayerProvidedRecords
         MedicalEntries = other.MedicalEntries.Select(x => new RecordEntry(x)).ToList();
         SecurityEntries = other.SecurityEntries.Select(x => new RecordEntry(x)).ToList();
         EmploymentEntries = other.EmploymentEntries.Select(x => new RecordEntry(x)).ToList();
+        CentCommEntries = other.CentCommEntries.Select(x => new RecordEntry(x)).ToList();
         AdminEntries = other.AdminEntries.Select(x => new RecordEntry(x)).ToList();
     }
 
@@ -151,6 +156,7 @@ public sealed partial class PlayerProvidedRecords
             medicalEntries: new List<RecordEntry>(),
             securityEntries: new List<RecordEntry>(),
             employmentEntries: new List<RecordEntry>(),
+            centcommEntries: new List<RecordEntry>(),
             adminEntries: new List<RecordEntry>()
         );
     }
@@ -297,7 +303,7 @@ public sealed partial class PlayerProvidedRecords
     }
 }
 
-public enum CharacterRecordType : byte
+public enum RecordType : byte
 {
-    Employment, Medical, Security, Admin,
+    Employment, Medical, Security, CentComm, Admin,
 }

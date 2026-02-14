@@ -1,7 +1,6 @@
 using Content.Shared._SV.Records;
-using Content.Server._SV.Records.Components;
 
-namespace Content.Server._SV.Records.Components;
+namespace Content.Server._SV.Records;
 
 /// <summary>
 /// The component on the station that stores records after the round starts.
@@ -25,7 +24,7 @@ public sealed partial class RecordsComponent : Component
     }
 }
 
-public sealed record CharacterRecordKey
+public sealed record RecordKey
 {
     public EntityUid Station { get; init; }
     public uint Index { get; init; }
