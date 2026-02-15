@@ -35,11 +35,11 @@
       default: [ HarpyTailPhoenix ]
     enum.HumanoidVisualLayers.LArm:
       limit: 1
-      required: true
-      default: [ HarpyWingDefault ]
+      required: false
     enum.HumanoidVisualLayers.RArm:
       limit: 1
-      required: false
+      required: true
+      default: [ HarpyWingDefault ]
     enum.HumanoidVisualLayers.LHand:
       limit: 1
       required: false
