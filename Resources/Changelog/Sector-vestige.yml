@@ -1417,3 +1417,9 @@ Entries:
       message: RCD and RPD now rotate properly.
   id: 194
   time: '2026-02-15T17:50:00.0000000+00:00'
+- author: ReboundQ3
+  changes:
+    - type: Fix
+      message: Fixed harpy markings.
+  id: 195
+  time: '2026-02-16T17:23:47.0000000+00:00'
