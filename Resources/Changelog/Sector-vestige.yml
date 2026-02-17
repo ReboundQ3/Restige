@@ -1423,3 +1423,9 @@ Entries:
       message: Fixed harpy markings.
   id: 195
   time: '2026-02-16T17:23:47.0000000+00:00'
+- author: OnyxTheBrave
+  changes:
+    - type: Fix
+      message: Fixed dog tags not showing up in the loadout selection.
+  id: 196
+  time: '2026-02-17T08:13:14.0000000+00:00'
