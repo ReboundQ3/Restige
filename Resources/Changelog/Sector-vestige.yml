@@ -1483,3 +1483,9 @@ Entries:
       message: Rejoice! Space dragon eyes && dragon wings return.
   id: 204
   time: '2026-03-01T12:16:00.0000000+00:00'
+- author: OnyxTheBrave
+  changes:
+    - type: Tweak
+      message: Dawn's plushie has a new owner.
+  id: 205
+  time: '2026-03-01T12:18:14.0000000+00:00'
