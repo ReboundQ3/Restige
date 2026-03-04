@@ -1507,3 +1507,9 @@ Entries:
       message: Moved the Supermatter guidebook page to its proper place.
   id: 208
   time: '2026-03-04T10:29:44.0000000+00:00'
+- author: qu4drivium
+  changes:
+    - type: Tweak
+      message: Decreased how often tips show in the endround and lobby.
+  id: 209
+  time: '2026-03-04T15:01:08.0000000+00:00'
