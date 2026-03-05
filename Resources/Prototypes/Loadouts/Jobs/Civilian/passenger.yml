@@ -33,11 +33,13 @@
   id: GreyJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorGrey
+  groupBy: "jumpsuit" #Tag added by Sector-Vestige
 
 - type: loadout
   id: GreyJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorGrey
+  groupBy: "jumpsuit" #Tag added by Sector-Vestige
 
 # Rainbow
 - type: loadout
@@ -47,6 +49,7 @@
     proto: GreyTider
   equipment:
     jumpsuit: ClothingUniformColorRainbow
+  groupBy: "rainbow" #Tag added by Sector-Vestige
 
 # Rainbow Jumpskirt
 - type: loadout
@@ -56,6 +59,7 @@
     proto: GreyTider
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorRainbow
+  groupBy: "rainbow" #Tag added by Sector-Vestige
 
 # Ancient
 - type: loadout

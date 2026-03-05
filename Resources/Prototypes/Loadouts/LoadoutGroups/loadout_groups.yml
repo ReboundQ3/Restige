@@ -306,7 +306,7 @@
 
 - type: loadoutGroup
   id: CommonBackpack
-  name: loadout-vestige-backpack #Changed by SV
+  name: loadout-group-vestige-backpack #Changed by SV
   loadouts:
   - CommonBackpack
   - CommonSatchel
@@ -991,6 +991,10 @@
   - StationEngineerJumpsuit
   - StationEngineerJumpskirt
   - StationEngineerHazardsuit
+  - StationEngineerCasualsuit #CD? Wasn't here so I added it back -SV
+  - StationEngineerPants #CD? Wasn't here so I added it back -SV
+  - StationEngineerJumpsuitMechanic #CD? Wasn't here so I added it back -SV
+  - StationEngineerJumpskirtMechanic #CD? Wasn't here so I added it back -SV
   # - SeniorEngineerJumpsuit
   # - SeniorEngineerJumpskirt
 

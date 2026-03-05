@@ -3,51 +3,61 @@
   id: LawyerJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitLawyerBlack
+  groupBy: "jumpsuit" #Tag added by Sector-Vestige
 
 - type: loadout
   id: LawyerJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtLawyerBlack
+  groupBy: "jumpsuit" #Tag added by Sector-Vestige
 
 - type: loadout
   id: LawyerJumpsuitBlue
   equipment:
     jumpsuit: ClothingUniformJumpsuitLawyerBlue
+  groupBy: "blue" #Tag added by Sector-Vestige
 
 - type: loadout
   id: LawyerJumpskirtBlue
   equipment:
     jumpsuit: ClothingUniformJumpskirtLawyerBlue
+  groupBy: "blue" #Tag added by Sector-Vestige
 
 - type: loadout
   id: LawyerJumpsuitPurple
   equipment:
     jumpsuit: ClothingUniformJumpsuitLawyerPurple
+  groupBy: "purple" #Tag added by Sector-Vestige
 
 - type: loadout
   id: LawyerJumpskirtPurple
   equipment:
     jumpsuit: ClothingUniformJumpskirtLawyerPurple
+  groupBy: "purple" #Tag added by Sector-Vestige
 
 - type: loadout
   id: LawyerJumpsuitRed
   equipment:
     jumpsuit: ClothingUniformJumpsuitLawyerRed
+  groupBy: "red" #Tag added by Sector-Vestige
 
 - type: loadout
   id: LawyerJumpskirtRed
   equipment:
     jumpsuit: ClothingUniformJumpskirtLawyerRed
+  groupBy: "red" #Tag added by Sector-Vestige
 
 - type: loadout
   id: LawyerJumpsuitGood
   equipment:
     jumpsuit: ClothingUniformJumpsuitLawyerGood
+  groupBy: "good" #Tag added by Sector-Vestige
 
 - type: loadout
   id: LawyerJumpskirtGood
   equipment:
     jumpsuit: ClothingUniformJumpskirtLawyerGood
+  groupBy: "good" #Tag added by Sector-Vestige
 
 # Neck
 - type: loadout

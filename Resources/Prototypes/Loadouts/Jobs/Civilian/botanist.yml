@@ -14,11 +14,13 @@
   id: BotanistJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitHydroponics
+  groupBy: "jumpsuit" #Tag added by Sector-Vestige
 
 - type: loadout
   id: BotanistJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtHydroponics
+  groupBy: "jumpsuit" #Tag added by Sector-Vestige
 
 - type: loadout
   id: BotanistOveralls

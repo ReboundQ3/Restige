@@ -15,11 +15,13 @@
   id: ChefJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitChef
+  groupBy: "jumpsuit" #Tag added by Sector-Vestige
 
 - type: loadout
   id: ChefJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtChef
+  groupBy: "jumpsuit" #Tag added by Sector-Vestige
 
 # Outer clothing
 - type: loadout

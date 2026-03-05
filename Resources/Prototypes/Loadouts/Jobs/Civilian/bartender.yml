@@ -23,11 +23,13 @@
   id: BartenderJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitBartender
+  groupBy: "jumpsuit" #Tag added by Sector-Vestige
 
 - type: loadout
   id: BartenderJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtBartender
+  groupBy: "jumpsuit" #Tag added by Sector-Vestige
 
 - type: loadout
   id: BartenderJumpsuitPurple

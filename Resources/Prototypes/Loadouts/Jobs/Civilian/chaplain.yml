@@ -65,21 +65,25 @@
   id: ChaplainJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitChaplain
+  groupBy: "jumpsuit" #Tag added by Sector-Vestige
 
 - type: loadout
   id: ChaplainJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtChaplain
+  groupBy: "jumpsuit" #Tag added by Sector-Vestige
 
 - type: loadout
   id: ChaplainRobesDark
   equipment:
     jumpsuit: ClothingUniformJumpsuitMonasticRobeDark
+  groupBy: "robes" #Tag added by Sector-Vestige
 
 - type: loadout
   id: ChaplainRobesLight
   equipment:
     jumpsuit: ClothingUniformJumpsuitMonasticRobeLight
+  groupBy: "robes" #Tag added by Sector-Vestige
 
 # Neck
 - type: loadout

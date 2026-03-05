@@ -14,21 +14,25 @@
   id: ClownSuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitClown
+  groupBy: "jumpsuit" #Tag added by Sector-Vestige
 
 - type: loadout
   id: ClownSkirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtClown
+  groupBy: "jumpsuit" #Tag added by Sector-Vestige
 
 - type: loadout
   id: JesterSuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitJester
+  groupBy: "jester" #Tag added by Sector-Vestige
 
 - type: loadout
   id: JesterAltSuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitJesterAlt
+  groupBy: "jester" #Tag added by Sector-Vestige
 
 # Back
 - type: loadout

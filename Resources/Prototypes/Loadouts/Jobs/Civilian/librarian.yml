@@ -3,18 +3,22 @@
   id: LibrarianJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitLibrarian
+  groupBy: "jumpsuit" #Tag added by Sector-Vestige
 
 - type: loadout
   id: LibrarianJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtLibrarian
+  groupBy: "jumpsuit" #Tag added by Sector-Vestige
 
 - type: loadout
   id: CuratorJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitCurator
+  groupBy: "curator" #Tag added by Sector-Vestige
 
 - type: loadout
   id: CuratorJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtCurator
+  groupBy: "curator" #Tag added by Sector-Vestige
