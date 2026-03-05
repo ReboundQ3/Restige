@@ -19,31 +19,31 @@
   id: HeadofSecurityJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtHoS
-  groupBy: "jumpskirt"
+  groupBy: "jumpsuit" #Changed by SV
 
 - type: loadout
   id: HeadofSecurityTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitHoSAlt
-  groupBy: "jumpsuit"
+  groupBy: "Alt" #Changed by SV
 
 - type: loadout
   id: HeadofSecurityTurtleneckSkirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtHoSAlt
-  groupBy: "jumpskirt"
+  groupBy: "Alt" #Changed by SV
 
 - type: loadout
   id: HeadofSecurityFormalSuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitHosFormal
-  groupBy: "jumpsuit"
+  groupBy: "formal" #Changed by SV
 
 - type: loadout
   id: HeadofSecurityFormalSkirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtHosFormal
-  groupBy: "jumpskirt"
+  groupBy: "formal" #Changed by SV
 
 # Head
 - type: loadout
