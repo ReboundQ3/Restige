@@ -1553,3 +1553,9 @@ Entries:
       message: Cadets now have access to personal items.
   id: 213
   time: '2026-03-05T16:28:59.0000000+00:00'
+- author: qu4drivium
+  changes:
+    - type: Tweak
+      message: Felinids can now mrow, miao, miaou, and a few more.
+  id: 214
+  time: '2026-03-05T16:31:10.0000000+00:00'
