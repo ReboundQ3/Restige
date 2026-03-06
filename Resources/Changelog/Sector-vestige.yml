@@ -1525,3 +1525,25 @@ Entries:
       message: Fixed Plasma lacking Senior roles.
   id: 211
   time: '2026-03-05T15:44:16.0000000+00:00'
+- author: JuneSzalkowska
+  changes:
+    - type: Add
+      message: Added Captain's beret
+    - type: Add
+      message: Added CD Mechanic Jumpsuits to Senior and Station Engineer loadouts
+    - type: Tweak
+      message: >-
+        Hidden PDAs for jobs that cannot select a different one (i.e not a
+        scientist)
+    - type: Tweak
+      message: Uniforms are now grouped by outfit type
+    - type: Tweak
+      message: Plushies are now grouped together
+    - type: Fix
+      message: Restored Roboticist PDA
+    - type: Fix
+      message: Restored CD Engineering Uniforms
+    - type: Remove
+      message: Loadout categories no longer list the job title in their content
+  id: 212
+  time: '2026-03-06T09:18:15.0000000+00:00'
