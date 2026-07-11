@@ -30,4 +30,16 @@ public sealed class SVCCVars : CVars
     /// </summary>
     public static readonly CVarDef<int>
         CharacterDocumentBinRetentionDays = CVarDef.Create("sv.character_documents.bin_retention_days", 30, CVar.SERVERONLY);
+
+    /// <summary>
+    /// A toggle to show SV's patrons yes or no
+    /// </summary>
+    public static readonly CVarDef<bool>
+        ShowSVOocPatreonColor = CVarDef.Create("sv.show_ooc_patreon_color", true, CVar.ARCHIVE | CVar.REPLICATED | CVar.CLIENT);
+
+    /// <summary>
+    /// CVAR to set the link to the SV_Patreon_Store
+    /// </summary>
+    public static readonly CVarDef<string>
+        SetSVPatreonStore = CVarDef.Create("sv.patreon_store", string.Empty, CVar.SERVER);
 }
