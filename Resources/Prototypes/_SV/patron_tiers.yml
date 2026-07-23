@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2026 Sector-Vestige contributors
+# SPDX-FileCopyrightText: 2026 Sector Vestige contributors (modifications)
+# SPDX-FileCopyrightText: 2026 ReboundQ3 <22770594+ReboundQ3@users.noreply.github.com>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: patronTier
+  id: tier1
+  displayName: patron-tier-tier1-name
+  oocColor: "#F0DFA6" # champagne
+
+- type: patronTier
+  id: tier2
+  displayName: patron-tier-tier2-name
+  oocColor: "#FFD24A" # gold
+
+- type: patronTier
+  id: tier3
+  displayName: patron-tier-tier3-name
+  oocColor: "#FFA928" # amber

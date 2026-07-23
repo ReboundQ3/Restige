@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Content.Server._SV.Sponsors; // SV - Patreon
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
@@ -8,6 +9,7 @@ using Content.Server.Discord.DiscordLink;
 using Content.Server.Ghost;
 using Content.Server.Players.RateLimiting;
 using Content.Server.Preferences.Managers;
+using Content.Shared._SV.CCVar; // SV - Patreon
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -41,6 +43,7 @@ internal sealed partial class ChatManager : IChatManager
     [Dependency] private IAdminManager _adminManager = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private IServerPreferencesManager _preferencesManager = default!;
+    [Dependency] private SponsorManager _sponsors = default!; // SV - Patreon
     [Dependency] private IConfigurationManager _configurationManager = default!;
     [Dependency] private INetConfigurationManager _netConfigManager = default!;
     [Dependency] private IEntityManager _entityManager = default!;
@@ -293,10 +296,13 @@ internal sealed partial class ChatManager : IChatManager
             var prefs = _preferencesManager.GetPreferences(player.UserId);
             colorOverride = prefs.AdminOOCColor;
         }
-        if (  _netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) && player.Channel.UserData.PatronTier is { } patron && PatronOocColors.TryGetValue(patron, out var patronColor))
+        // SV changes - Sponsor/patron entitlement manager - Start
+        if (_netConfigManager.GetClientCVar(player.Channel, SVCCVars.ShowSVOocPatreonColor)
+            && _sponsors.TryGetOocColor(player.UserId, out var patronColor))
         {
-            wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", patronColor),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+            wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", patronColor), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
         }
+        // SV changes - Sponsor/patron entitlement manager - End
 
         //TODO: player.Name color, this will need to change the structure of the MsgChatMessage
         ChatMessageToAll(ChatChannel.OOC, message, wrappedMessage, EntityUid.Invalid, hideChat: false, recordReplay: true, colorOverride: colorOverride, author: player.UserId);

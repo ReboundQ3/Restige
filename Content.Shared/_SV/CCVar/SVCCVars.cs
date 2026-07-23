@@ -42,4 +42,17 @@ public sealed class SVCCVars : CVars
     /// </summary>
     public static readonly CVarDef<string>
         SetSVPatreonStore = CVarDef.Create("sv.patreon_store", string.Empty, CVar.SERVER);
+
+    /// <summary>
+    /// Bearer token for reading the SV Patreon entitlement store.
+    /// Secret: set via server config, never committed.
+    /// </summary>
+    public static readonly CVarDef<string>
+        SVPatreonToken = CVarDef.Create("sv.patreon_token", string.Empty, CVar.SERVERONLY);
+
+    /// <summary>
+    /// How often (in seconds) to poll the entitlement store. Default 300.
+    /// </summary>
+    public static readonly CVarDef<int>
+        SVPatreonPollInterval = CVarDef.Create("sv.patreon_poll_interval", 300, CVar.SERVERONLY);
 }
