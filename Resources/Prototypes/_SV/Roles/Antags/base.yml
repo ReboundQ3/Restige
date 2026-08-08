@@ -1,0 +1,23 @@
+# Silicon antag specifiers
+- type: antagSpecifier
+  abstract: true
+  parent: BaseAntagSpecifier
+  id: BaseStationAiAntag
+  jobWhitelist:
+  - StationAi
+  # Silicons have no HumanoidProfileComponent, so IsEntityValid rejects them without this
+  allowNonHumans: true
+  blacklist:
+    components:
+    - AntagImmune
+
+- type: antagSpecifier
+  abstract: true
+  parent: BaseAntagSpecifier
+  id: BaseCyborgAntag # Not used yet
+  jobWhitelist:
+  - Borg
+  allowNonHumans: true
+  blacklist:
+    components:
+    - AntagImmune

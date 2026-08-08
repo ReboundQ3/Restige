@@ -1,0 +1,11 @@
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleSVMalfunctioningAI
+  name: Malfunctioning AI Role
+  description: Mind role for a station AI whose directives have been subverted.
+  components:
+  - type: MindRole
+    antagPrototype: SVMalfunctioningAI
+    roleType: SVSiliconAntagonist
+    subtype: sv-role-subtype-malf-ai
+  - type: MalfunctioningAiRole

@@ -1,0 +1,5 @@
+- type: roleType
+  id: SVSiliconAntagonist
+  name: sv-role-type-silicon-antagonist-name
+  color: '#00FF41'
+  symbol: "◉"

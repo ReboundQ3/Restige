@@ -17,3 +17,18 @@
   - AllHostile
   - Wizard
   - Xenoborg
+
+# Malfunctioning Silicons faction
+- type: npcFaction
+  id: MalfunctioningSilicons
+  hostile:
+  - SimpleHostile
+  - Syndicate
+  - Xeno
+  - Zombie
+  - Revolutionary
+  - Dragon
+  - AllHostile
+  - Wizard
+  - Xenoborg
+  - NanoTrasen

@@ -1,0 +1,21 @@
+- type: antag
+  id: SVMalfunctioningAI
+  name: sv-roles-antag-malfai-name
+  antagonist: true
+  setPreference: true
+  visiblePreference: true
+  category: Independent
+  objective: sv-roles-antag-malfai-objective
+  # guides: [ sv-malfai ]
+  requirements:
+  - !type:RoleTimeRequirement
+    role: JobStationAi
+    time: 3h
+
+- type: antagSpecifier
+  parent: BaseStationAiAntag
+  id: SVMalfunctioningAI
+  prefRoles:
+  - SVMalfunctioningAI
+  mindRoles:
+  - MindRoleSVMalfunctioningAI

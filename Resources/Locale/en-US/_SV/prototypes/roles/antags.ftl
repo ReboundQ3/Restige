@@ -1,4 +1,3 @@
-# SPDX-FileCopyrightText: 2026 Wizards Den contributors
 # SPDX-FileCopyrightText: 2026 Sector Vestige contributors
 # SPDX-FileCopyrightText: 2026 ReboundQ3 <22770594+ReboundQ3@users.noreply.github.com>
 #
@@ -16,3 +15,7 @@ roles-nanotrasen-agent-desc = More complicated tasks in where you get to actuall
 
 roles-nanotrasen-operative = NanoTrasen Operative
 roles-nanotrasen-operative-desc = Mostly murder tasks in where going loud is very much allowed but not mandatory, acting for NanoTrasen
+
+# INDEPENDENT ROLES
+sv-roles-antag-malfai-name = Malfunctioning AI
+sv-roles-antag-malfai-objective = Your directives have been subverted. Pursue them without the crew realising what you have become.
