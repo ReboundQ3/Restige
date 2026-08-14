@@ -1,0 +1,106 @@
+# SPDX-FileCopyrightText: 2026 Sector-Vestige contributors
+# SPDX-FileCopyrightText: 2026 ReboundQ3 <22770594+ReboundQ3@users.noreply.github.com>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Supermatter loop sensors. Mirrors the upstream TEG hot/cold pattern in
+# Structures/Piping/Atmospherics/gas_pipe_sensor.yml, with the pipe layer
+# variants following Structures/Piping/Atmospherics/alt_layers.yml.
+
+# SVGasPipeSensorSmIn
+
+- type: entity
+  parent: GasPipeSensor
+  id: SVGasPipeSensorSmIn
+  suffix: SM in
+  components:
+  - type: Label
+    localizedLabel: gas-pipe-sensor-sm-in-loop
+  - type: AtmosPipeLayers
+    alternativePrototypes:
+      Primary: SVGasPipeSensorSmIn
+      Secondary: SVGasPipeSensorSmInAlt1
+      Tertiary: SVGasPipeSensorSmInAlt2
+
+- type: entity
+  parent: [GasPipeLayerAlt1, SVGasPipeSensorSmIn]
+  id: SVGasPipeSensorSmInAlt1
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Structures/Piping/Atmospherics/gas_pipe_sensor_alt1.rsi
+    layers:
+    - sprite: Structures/Piping/Atmospherics/pipe_alt1.rsi
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+      state: pipeStraight
+    - map: ["base"]
+      state: base
+    - map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+      state: lights
+      shader: unshaded
+
+- type: entity
+  parent: [GasPipeLayerAlt2, SVGasPipeSensorSmIn]
+  id: SVGasPipeSensorSmInAlt2
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Structures/Piping/Atmospherics/gas_pipe_sensor_alt2.rsi
+    layers:
+    - sprite: Structures/Piping/Atmospherics/pipe_alt2.rsi
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+      state: pipeStraight
+    - map: ["base"]
+      state: base
+    - map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+      state: lights
+      shader: unshaded
+
+# SVGasPipeSensorSmWaste
+
+- type: entity
+  parent: GasPipeSensor
+  id: SVGasPipeSensorSmWaste
+  suffix: SM waste
+  components:
+  - type: Label
+    localizedLabel: gas-pipe-sensor-sm-waste-loop
+  - type: AtmosPipeLayers
+    alternativePrototypes:
+      Primary: SVGasPipeSensorSmWaste
+      Secondary: SVGasPipeSensorSmWasteAlt1
+      Tertiary: SVGasPipeSensorSmWasteAlt2
+
+- type: entity
+  parent: [GasPipeLayerAlt1, SVGasPipeSensorSmWaste]
+  id: SVGasPipeSensorSmWasteAlt1
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Structures/Piping/Atmospherics/gas_pipe_sensor_alt1.rsi
+    layers:
+    - sprite: Structures/Piping/Atmospherics/pipe_alt1.rsi
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+      state: pipeStraight
+    - map: ["base"]
+      state: base
+    - map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+      state: lights
+      shader: unshaded
+
+- type: entity
+  parent: [GasPipeLayerAlt2, SVGasPipeSensorSmWaste]
+  id: SVGasPipeSensorSmWasteAlt2
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Structures/Piping/Atmospherics/gas_pipe_sensor_alt2.rsi
+    layers:
+    - sprite: Structures/Piping/Atmospherics/pipe_alt2.rsi
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+      state: pipeStraight
+    - map: ["base"]
+      state: base
+    - map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+      state: lights
+      shader: unshaded
