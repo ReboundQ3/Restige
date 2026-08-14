@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Client._SV.Stylesheets;
 using Content.Client.Stylesheets.Stylesheets;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
@@ -17,6 +18,10 @@ namespace Content.Client.Stylesheets
         [Dependency]
         private IResourceCache
             _resCache = default!; // TODO: REMOVE (obsolete; used to construct StyleNano/StyleSpace)
+
+        // Sector Vestige: the fork's own sheets, and the ones actually applied by default.
+        public Stylesheet SheetSv { get; private set; } = default!;
+        public Stylesheet SheetSvSystem { get; private set; } = default!;
 
         public Stylesheet SheetNanotrasen { get; private set; } = default!;
         public Stylesheet SheetSystem { get; private set; } = default!;
@@ -49,10 +54,13 @@ namespace Content.Client.Stylesheets
             Stylesheets = new Dictionary<string, Stylesheet>();
             SheetNanotrasen = Init(new NanotrasenStylesheet(new BaseStylesheet.NoConfig(), this));
             SheetSystem = Init(new SystemStylesheet(new BaseStylesheet.NoConfig(), this));
+            // Sector Vestige: registered after the upstream sheets they derive from.
+            SheetSv = Init(new SVStylesheet(new BaseStylesheet.NoConfig(), this));
+            SheetSvSystem = Init(new SVSystemStylesheet(new BaseStylesheet.NoConfig(), this));
             SheetNano = new StyleNano(_resCache).Stylesheet; // TODO: REMOVE (obsolete)
             SheetSpace = new StyleSpace(_resCache).Stylesheet; // TODO: REMOVE (obsolete)
 
-            _userInterfaceManager.Stylesheet = SheetNanotrasen;
+            _userInterfaceManager.Stylesheet = SheetSv;
 
             // warn about unused sheetlets
             if (UnusedSheetlets.Count > 0)

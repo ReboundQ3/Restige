@@ -1,3 +1,4 @@
+using Content.Client._SV.Stylesheets;
 using Content.Client.Resources;
 using Content.Client.Stylesheets.Fonts;
 using Content.Client.Stylesheets.Palette;
@@ -29,14 +30,14 @@ public sealed class LabelSheetlet : Sheetlet<PalettedStylesheet>
             E<Label>()
                 .Class(StyleClass.LabelSubText)
                 .Font(sheet.BaseFont.GetFont(10))
-                .FontColor(Color.DarkGray),
+                .FontColor(SVPalettes.Muted.Base),
             E<Label>()
                 .Class(StyleClass.LabelKeyText)
                 .Font(sheet.BaseFont.GetFont(12, FontKind.Bold))
                 .FontColor(sheet.HighlightPalette.Text),
             E<Label>()
                 .Class(StyleClass.LabelWeak)
-                .FontColor(Color.DarkGray), // TODO: you know the drill by now
+                .FontColor(SVPalettes.Muted.Base),
 
             E<Label>()
                 .Class(StyleClass.Positive)
@@ -50,19 +51,19 @@ public sealed class LabelSheetlet : Sheetlet<PalettedStylesheet>
 
             E<Label>()
                 .Class(StyleClass.StatusGood)
-                .FontColor(Palettes.Status.Good),
+                .FontColor(SVPalettes.Status.Good),
             E<Label>()
                 .Class(StyleClass.StatusOkay)
-                .FontColor(Palettes.Status.Okay),
+                .FontColor(SVPalettes.Status.Okay),
             E<Label>()
                 .Class(StyleClass.StatusWarning)
-                .FontColor(Palettes.Status.Warning),
+                .FontColor(SVPalettes.Status.Warning),
             E<Label>()
                 .Class(StyleClass.StatusBad)
-                .FontColor(Palettes.Status.Bad),
+                .FontColor(SVPalettes.Status.Bad),
             E<Label>()
                 .Class(StyleClass.StatusCritical)
-                .FontColor(Palettes.Status.Critical),
+                .FontColor(SVPalettes.Status.Critical),
 
             // Console text
             E<Label>()

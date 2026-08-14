@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Sector-Vestige contributors
+#
+# SPDX-License-Identifier: CC-BY-SA-3.0
+
+# Every texture in this directory is a recoloured derivative of the equivalent file in
+# Resources/Textures/Interface/Nano, produced by Tools/sv_recolour_interface.py. Only hue and
+# chroma were changed; lightness, alpha and geometry are unmodified. Original authorship and
+# licensing carry over from Nano/attributions.yml.
+- files: ["Radial/back_hover.png",
+           "Radial/back_normal.png",
+           "Radial/button_hover.png",
+           "Radial/button_normal.png",
+           "Radial/close_hover.png",
+           "Radial/close_normal.png",
+           "black_panel_red_thin_border.png",
+           "chat_sub_background.png",
+           "checkbox_checked.svg.96dpi.png",
+           "checkbox_unchecked.svg.96dpi.png",
+           "gear.svg.192dpi.png",
+           "light_panel_background_bordered.png",
+           "lineedit.png",
+           "lock.svg.192dpi.png",
+           "lock_open.svg.192dpi.png",
+           "nanoheading.svg.96dpi.png",
+           "tabcontainer_panel.png",
+           "tooltip.png",
+           "transparent_window_background_bordered.png",
+           "whisper.png",
+           "window_background_bordered.png",
+           "window_header.png",
+           "window_header_alert.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Space Wizards Federation, recoloured for Sector Vestige"
+  source: "https://github.com/space-wizards/space-station-14"

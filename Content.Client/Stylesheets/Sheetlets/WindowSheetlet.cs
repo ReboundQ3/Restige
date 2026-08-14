@@ -1,4 +1,5 @@
 ﻿using Content.Client.Resources;
+using Content.Client._SV.Stylesheets;
 using Content.Client.Stylesheets.Fonts;
 using Content.Client.Stylesheets.Palette;
 using Content.Client.Stylesheets.SheetletConfigs;
@@ -87,19 +88,19 @@ public sealed class WindowSheetlet<T> : Sheetlet<T>
             E<TextureButton>()
                 .Class(DefaultWindow.StyleClassWindowCloseButton)
                 .PseudoNormal()
-                .Modulate(Palettes.Neutral.Element),
+                .Modulate(SVPalettes.Deck.Element),
             E<TextureButton>()
                 .Class(DefaultWindow.StyleClassWindowCloseButton)
                 .PseudoHovered()
-                .Modulate(Palettes.Red.HoveredElement),
+                .Modulate(SVPalettes.Red.HoveredElement),
             E<TextureButton>()
                 .Class(DefaultWindow.StyleClassWindowCloseButton)
                 .PseudoPressed()
-                .Modulate(Palettes.Red.PressedElement),
+                .Modulate(SVPalettes.Red.PressedElement),
             E<TextureButton>()
                 .Class(DefaultWindow.StyleClassWindowCloseButton)
                 .PseudoDisabled()
-                .Modulate(Palettes.Red.DisabledElement),
+                .Modulate(SVPalettes.Red.DisabledElement),
 
             // Title
             E<Label>()
@@ -126,7 +127,7 @@ public sealed class WindowSheetlet<T> : Sheetlet<T>
             E<Label>()
                 .Class("WindowFooterText") // TODO: hardcoding font
                 .Prop(Label.StylePropertyFont, sheet.BaseFont.GetFont(8))
-                .Prop(Label.StylePropertyFontColor, Color.FromHex("#757575")),
+                .Prop(Label.StylePropertyFontColor, SVPalettes.Muted.DisabledElement),
         ];
     }
 }

@@ -41,10 +41,11 @@ public sealed class PanelSheetlet<T> : Sheetlet<T> where T : PalettedStylesheet,
             E<PanelContainer>().Class(StyleClass.Negative).Panel(boxNegative),
             E<PanelContainer>().Class(StyleClass.Highlight).Panel(boxHighlight),
 
-            // TODO: this should probably be cleaned up but too many UIs rely on this hardcoded color so I'm scared to touch it
+            // Legacy class name kept because a large number of UIs still reference it directly; the
+            // colour it used to hardcode (#25252A) is now whatever the palette says the window ground is.
             E<PanelContainer>()
                 .Class("BackgroundDark")
-                .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(Color.FromHex("#25252A"))),
+                .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(sheet.SecondaryPalette.Background)),
 
             // panels that have the same corner bezels as buttons
             E()

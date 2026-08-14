@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._SV.Stylesheets;
 using Content.Client.Stylesheets.Palette;
 using Content.Client.Stylesheets.SheetletConfigs;
 using Content.Client.Stylesheets.Stylesheets;
@@ -12,6 +13,10 @@ namespace Content.Client.Stylesheets.Sheetlets;
 [CommonSheetlet]
 public sealed class ButtonSheetlet<T> : Sheetlet<T> where T : PalettedStylesheet, IButtonConfig, IIconConfig
 {
+    /// A disabled button keeps its label legible but clearly inactive: the default near-white label
+    /// colour at half alpha.
+    private static readonly Color DisabledLabel = SVPalettes.AlphaModulate.Element.WithAlpha(0.5f);
+
     public override StyleRule[] GetRules(T sheet, object config)
     {
         IButtonConfig buttonCfg = sheet;
@@ -69,11 +74,11 @@ public sealed class ButtonSheetlet<T> : Sheetlet<T> where T : PalettedStylesheet
                 .AlignMode(Label.AlignMode.Center),
 
             // Have disabled button's text be faded
-            CButton().PseudoDisabled().ParentOf(E<Label>()).FontColor(Color.FromHex("#E5E5E581")),
-            CButton().PseudoDisabled().ParentOf(E()).ParentOf(E<Label>()).FontColor(Color.FromHex("#E5E5E581")),
+            CButton().PseudoDisabled().ParentOf(E<Label>()).FontColor(DisabledLabel),
+            CButton().PseudoDisabled().ParentOf(E()).ParentOf(E<Label>()).FontColor(DisabledLabel),
         };
         // Texture button modulation
-        MakeButtonRules<TextureButton>(rules, Palettes.AlphaModulate, null);
+        MakeButtonRules<TextureButton>(rules, SVPalettes.AlphaModulate, null);
         MakeButtonRules<TextureButton>(rules, sheet.NegativePalette, StyleClass.CrossButtonRed);
 
         MakeButtonRules(rules, buttonCfg.ButtonPalette, null);

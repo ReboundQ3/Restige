@@ -1,3 +1,4 @@
+using Content.Client._SV.Stylesheets;
 using Content.Client.ContextMenu.UI;
 using Content.Client.Resources;
 using Content.Client.Stylesheets.Fonts;
@@ -17,12 +18,13 @@ namespace Content.Client.Stylesheets.Sheetlets.Hud;
 public sealed class ContextMenuSheetlet<T> : Sheetlet<T>
     where T : PalettedStylesheet, IWindowConfig, IButtonConfig, IIconConfig
 {
-    // TODO: make this not hardcoded (I am too scared to change the context menu colors)
+    // The context menu floats over the world rather than sitting inside a window, so its idle state is a
+    // near-transparent black scrim and only the interaction states pick up palette tones.
     private static readonly ColorPalette ContextButtonPalette = ColorPalette.FromHexBase("#000000") with
     {
-        HoveredElement = Color.DarkSlateGray,
-        Element = Color.FromHex("#1119"),
-        PressedElement = Color.LightSlateGray,
+        Element = Color.Black.WithAlpha(0.6f),
+        HoveredElement = SVPalettes.Hull.Element,
+        PressedElement = SVPalettes.Hull.PressedElement,
     };
 
     public override StyleRule[] GetRules(T sheet, object config)

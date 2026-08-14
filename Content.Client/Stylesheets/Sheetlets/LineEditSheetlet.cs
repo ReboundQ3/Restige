@@ -1,4 +1,5 @@
 ﻿using Content.Client.Stylesheets.SheetletConfigs;
+using Content.Client._SV.Stylesheets;
 using Content.Client.Stylesheets.Stylesheets;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
@@ -22,16 +23,15 @@ public sealed class LineEditSheetlet<T> : Sheetlet<T> where T : PalettedStyleshe
         [
             E<LineEdit>()
                 .Prop(LineEdit.StylePropertyStyleBox, lineEditStylebox),
-            // TODO: Hardcoded colors bad, kill.
             E<LineEdit>()
                 .Class(LineEdit.StyleClassLineEditNotEditable)
-                .Prop("font-color", new Color(192, 192, 192)),
+                .Prop("font-color", SVPalettes.Muted.Base),
             E<LineEdit>()
                 .Pseudo(LineEdit.StylePseudoClassPlaceholder)
-                .Prop("font-color", Color.Gray),
+                .Prop("font-color", SVPalettes.Muted.PressedElement),
             E<TextEdit>()
                 .Pseudo(TextEdit.StylePseudoClassPlaceholder)
-                .Prop("font-color", Color.Gray),
+                .Prop("font-color", SVPalettes.Muted.PressedElement),
         ];
     }
 }

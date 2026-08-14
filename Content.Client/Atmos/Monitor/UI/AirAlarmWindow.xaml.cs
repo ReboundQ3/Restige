@@ -1,3 +1,4 @@
+using Content.Client._SV.Stylesheets;
 using Content.Client.Atmos.Monitor.UI.Widgets;
 using Content.Client.Message;
 using Content.Client.Stylesheets.Palette;
@@ -186,9 +187,9 @@ public sealed partial class AirAlarmWindow : FancyWindow
     {
         return curAlarm switch
         {
-            AtmosAlarmType.Danger => Palettes.Status.Critical,
-            AtmosAlarmType.Warning => Palettes.Status.Warning,
-            _ => Palettes.Status.Good,
+            AtmosAlarmType.Danger => SVPalettes.Status.Critical,
+            AtmosAlarmType.Warning => SVPalettes.Status.Warning,
+            _ => SVPalettes.Status.Good,
         };
     }
 }

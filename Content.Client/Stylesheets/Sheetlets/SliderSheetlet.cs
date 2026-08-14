@@ -31,7 +31,7 @@ public sealed class SliderSheetlet<T> : Sheetlet<T> where T: PalettedStylesheet,
         var sliderForeBox = new StyleBoxTexture
         {
             Texture = sheet.GetTextureOr(sliderCfg.SliderOutlinePath, NanotrasenStylesheet.TextureRoot),
-            Modulate = Color.FromHex("#494949") // TODO: Unhardcode.
+            Modulate = sheet.SecondaryPalette.Element,
         };
 
         var sliderGrabBox = new StyleBoxTexture

@@ -1,4 +1,5 @@
 ﻿using Content.Client.Stylesheets.SheetletConfigs;
+using Content.Client._SV.Stylesheets;
 using Content.Client.Stylesheets.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Robust.Client.Graphics;
@@ -28,7 +29,7 @@ public sealed class PlaceholderSheetlet<T> : Sheetlet<T> where T: PalettedStyles
             E<Label>()
                 .Class(Placeholder.StyleClassPlaceholderText)
                 .Font(sheet.BaseFont.GetFont(16))
-                .FontColor(new Color(103, 103, 103, 128)), // TODO: fix hardcoded color
+                .FontColor(SVPalettes.Muted.DisabledElement.WithAlpha(0.5f)),
         ];
     }
 }

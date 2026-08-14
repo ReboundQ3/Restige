@@ -1,4 +1,5 @@
 ﻿using Content.Client.Stylesheets.Fonts;
+using Content.Client._SV.Stylesheets;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using static Content.Client.Stylesheets.StylesheetHelpers;
@@ -19,7 +20,7 @@ public sealed class ItemStatusSheetlet : Sheetlet<PalettedStylesheet>
             E()
                 .Class(StyleClass.ItemStatusNotHeld)
                 .Prop("font", sheet.BaseFont.GetFont(10, FontKind.Italic))
-                .Prop("font-color", Color.Gray),
+                .Prop("font-color", SVPalettes.Muted.PressedElement),
 
             E<RichTextLabel>()
                 .Class(StyleClass.ItemStatus)

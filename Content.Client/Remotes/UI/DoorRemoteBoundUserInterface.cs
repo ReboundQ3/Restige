@@ -1,3 +1,4 @@
+using Content.Client._SV.Stylesheets;
 using Content.Client.Stylesheets.Palette;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Remotes.Components;
@@ -8,8 +9,8 @@ namespace Content.Client.Remotes.UI;
 
 public sealed class DoorRemoteBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    private static readonly Color SelectedOptionColor = Palettes.Green.Element.WithAlpha(128);
-    private static readonly Color SelectedOptionHoverColor = Palettes.Green.HoveredElement.WithAlpha(128);
+    private static readonly Color SelectedOptionColor = SVPalettes.Green.Element.WithAlpha(128);
+    private static readonly Color SelectedOptionHoverColor = SVPalettes.Green.HoveredElement.WithAlpha(128);
 
     private SimpleRadialMenu? _menu;
 

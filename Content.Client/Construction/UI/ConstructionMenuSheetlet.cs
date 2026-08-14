@@ -1,3 +1,4 @@
+using Content.Client._SV.Stylesheets;
 using Content.Client.Stylesheets;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -20,7 +21,7 @@ public sealed class ConstructionMenuSheetlet : Sheetlet<PalettedStylesheet>
                 .Identifier("RecipeHistoryNavButtonLabel")
                 .PseudoDisabled()
                 .Font(sheet.BaseFont.GetFont(8))
-                .FontColor(Color.Gray),
+                .FontColor(SVPalettes.Muted.PressedElement),
         ];
     }
 }

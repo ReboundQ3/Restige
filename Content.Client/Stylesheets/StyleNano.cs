@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Client._SV.Stylesheets;
 using Content.Client.ContextMenu.UI;
 using Content.Client.Examine;
 using Content.Client.PDA;
@@ -94,12 +95,17 @@ namespace Content.Client.Stylesheets
         public static readonly Color PanelDark = Color.FromHex("#1E1E22");
 
         public static readonly Color NanoGold = Color.FromHex("#A88B5E");
-        public static readonly Color GoodGreenFore = Color.FromHex("#31843E");
-        public static readonly Color ConcerningOrangeFore = Color.FromHex("#A5762F");
-        public static readonly Color DangerousRedFore = Color.FromHex("#BB3232");
-        public static readonly Color DisabledFore = Color.FromHex("#5A5A5A");
+        // These five are the only colour constants on this class still read from outside it. They are
+        // palette-backed so that console readouts follow the fork's scheme; the rest of the constants
+        // below belong to the dead StyleNano stylesheet and are left alone.
+        public static readonly Color GoodGreenFore = SVPalettes.Green.Text;
+        public static readonly Color ConcerningOrangeFore = SVPalettes.Amber.Text;
+        public static readonly Color DangerousRedFore = SVPalettes.Red.Text;
+        // Deliberately `Text`, not `DisabledElement`: this is a foreground colour, and the palette's
+        // disabled *element* shade is the window background, which would render the label invisible.
+        public static readonly Color DisabledFore = SVPalettes.Deck.Text;
 
-        public static readonly Color ButtonColorDefault = Color.FromHex("#464966");
+        public static readonly Color ButtonColorDefault = SVPalettes.Hull.Element;
         public static readonly Color ButtonColorDefaultRed = Color.FromHex("#D43B3B");
         public static readonly Color ButtonColorHovered = Color.FromHex("#575b7f");
         public static readonly Color ButtonColorHoveredRed = Color.FromHex("#DF6B6B");

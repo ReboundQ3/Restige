@@ -5,7 +5,13 @@ namespace Content.Client.Stylesheets;
 
 public interface IStylesheetManager
 {
-    /// Nanotrasen styles: the default style! Use this for most UIs
+    /// Sector Vestige styles: the default style! Use this for most UIs
+    Stylesheet SheetSv { get; }
+
+    /// Sector Vestige system styles: use this for any admin / debug menus
+    Stylesheet SheetSvSystem { get; }
+
+    /// Nanotrasen styles: upstream's default. Prefer <see cref="SheetSv"/>
     Stylesheet SheetNanotrasen { get; }
 
     ///
