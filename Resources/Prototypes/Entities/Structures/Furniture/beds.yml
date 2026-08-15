@@ -57,6 +57,7 @@
     noRot: true
   - type: Anchorable
   - type: Pullable
+  - type: StationaryAnalyzerStrap # Offbrand
 
 
 - type: entity
@@ -78,7 +79,7 @@
     node: medicalbed
   - type: GuideHelp
     guides:
-    - MedicalDoctor
+    - OffbrandPhysician # Offbrand
   - type: AmbientMusicMarkerMedical
 
 - type: entity

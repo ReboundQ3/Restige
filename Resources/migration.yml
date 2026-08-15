@@ -919,3 +919,6 @@ FoodMeatSnail: MobSnail
 CratePartsT3: null
 CratePartsT3T4: null
 CratePartsT4: null
+
+# Offbrand
+Tourniquet: TourniquetOffbrand

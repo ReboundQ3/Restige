@@ -52,7 +52,14 @@ namespace Content.Shared.Examine
             EntityUid target,
             FormattedMessage message,
             bool getVerbs,
-            bool centerAtCursor);
+            bool centerAtCursor,
+            bool showBody = false); // Offbrand: added showBody
+
+        /// <summary>
+        ///     Offbrand - Updates an already-open examine tooltip with an additional message.
+        ///     Setting the same key multiple times will overwrite previous messages with that key.
+        /// </summary>
+        public abstract void ElaborateExamineTooltip(EntityUid user, Enum key, FormattedMessage message);
 
         /// <summary>
         /// Checks if an entity is close enough to an examiner to show information classified as details.

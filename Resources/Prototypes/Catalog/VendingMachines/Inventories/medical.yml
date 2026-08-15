@@ -31,7 +31,7 @@
     Gauze: 3
     Brutepack: 3
     Ointment: 3
-    Bloodpack: 3
+    ChemistryBottleParacetamol: 3 # Offbrand
     ChemistryBottleEpinephrine: 3
     Syringe: 3
     PillCanisterTricordrazine: 2
@@ -48,6 +48,7 @@
     AloeCream: 3 # Currently just a reskin of Ointment but it's something
     Bloodpack: 3
     ChemistryBottleInaprovaline: 3
+    ChemistryBottleParacetamol: 3 # Offbrand
     Syringe: 3
     PillTricordrazine: 10
   contrabandInventory:

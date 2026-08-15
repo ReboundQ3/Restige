@@ -86,11 +86,18 @@ namespace Content.Server.Construction
                     {
                         args.PushMarkup(Loc.GetString("deconstruction-header-text") + "\n");
                     }
+                    // Begin Offbrand
                     else
                     {
-                        // Try to get the name of the prototype on the node, if one exists.
-                        var targetProtoId = target.Entity.GetId(uid, args.Examiner, new(EntityManager));
-                        if (targetProtoId != null
+                        // A node may name itself explicitly (surgery graphs do this); prefer that
+                        // over the prototype lookup below.
+                        if (target.LocalizedName is { } localizedName)
+                        {
+                            args.PushMarkup(Loc.GetString(target.Header,
+                                ("targetName", Loc.GetString(localizedName))) + "\n");
+                        }
+                        // Otherwise try to get the name of the prototype on the node, if one exists.
+                        else if (target.Entity.GetId(uid, args.Examiner, new(EntityManager)) is { } targetProtoId
                             && ProtoMan.TryIndex(targetProtoId, out var targetPrototype))
                         {
                             args.PushMarkup(Loc.GetString("construction-component-to-create-prototype-header",
@@ -98,9 +105,11 @@ namespace Content.Server.Construction
                         }
                         else
                         {
-                            args.PushMarkup(Loc.GetString("construction-component-to-create-header") + "\n");
+                            args.PushMarkup(Loc.GetString(target.Header,
+                                ("targetName", target.Name)) + "\n");
                         }
                     }
+                    // End Offbrand
                 }
 
                 if (component.EdgeIndex == null && GetTargetEdge(uid, component) is { } targetEdge)
@@ -173,8 +182,11 @@ namespace Content.Server.Construction
                 // Initial construction header.
                 new()
                 {
-                    Localization = construction.Type == ConstructionType.Structure
-                        ? "construction-presenter-to-build" : "construction-presenter-to-craft",
+                    Localization = construction.Type switch {
+                        ConstructionType.Structure => "construction-presenter-to-build",
+                        ConstructionType.NodeToNode => "construction-presenter-to-node-to-node", // Offbrand
+                        _ => "construction-presenter-to-craft",
+                    },
                     EntryNumber = step,
                 }
             };
@@ -191,7 +203,7 @@ namespace Content.Server.Construction
                     return null;
 
                 // First steps are handled specially.
-                if (step == 1)
+                if (step == 1 && construction.Type != ConstructionType.NodeToNode) // Offbrand
                 {
                     foreach (var graphStep in edge.Steps)
                     {

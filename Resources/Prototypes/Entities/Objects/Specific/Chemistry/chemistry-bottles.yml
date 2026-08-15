@@ -1295,6 +1295,7 @@
     - id: ChemistryBottleHyronalin
     - id: ChemistryBottleStubantazine # Sector Vestige - Extra Painkillers
     - id: ChemistryBottleSoretizone # Sector Vestige - Extra Painkillers
+    - id: ChemistryBottleParacetamol # Offbrand
 
 - type: entityTable
   id: SpecialtyMedicineReagentBottleTable
@@ -1310,6 +1311,7 @@
     - id: ChemistryBottleOculine
     - id: ChemistryBottleCharcoal
     - id: ChemistryBottleLaughter
+    - id: ChemistryBottleTramadol # Offbrand
 
 - type: entityTable
   id: AllMedicineReagentBottlesTable
@@ -1366,3 +1368,5 @@
     - id: ChemistryBottleUltravasculine
     - id: ChemistryBottleCharcoal
     - id: ChemistryBottleLaughter
+    - id: ChemistryBottleParacetamol # Offbrand
+    - id: ChemistryBottleTramadol # Offbrand
