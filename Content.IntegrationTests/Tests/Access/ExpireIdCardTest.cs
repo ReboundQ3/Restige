@@ -45,17 +45,16 @@ namespace Content.IntegrationTests.Tests.Access
             ExpireIdCardComponent expireComp = default!;
             AccessComponent accessComp = default!;
             var expirationTimeInSeconds = 2.0f;
-            // SV: ExpireTime is an absolute timestamp, not a duration. Test pairs are pooled and
-            // recycled, so CurTime is already well past a bare TimeSpan.FromSeconds() and the
-            // card expires on the first tick. Anchor to the server clock instead. (issue #368)
-            var expireTime = TimeSpan.Zero;
+            // SV (issue #368): keep this a plain duration. Upstream now anchors it to the server
+            // clock at the SetExpireTime call below, which is what #368 asked for; adding CurTime
+            // here as well would double-count it and push the deadline out of reach of the test.
+            var expireTime = TimeSpan.FromSeconds(expirationTimeInSeconds);
 
             await Pair.Server.WaitPost(() =>
             {
                 ent = SSpawn(TestExpireIdCard);
                 expireComp = SComp<ExpireIdCardComponent>(ent);
                 accessComp = SComp<AccessComponent>(ent);
-                expireTime = SGameTiming.CurTime + TimeSpan.FromSeconds(expirationTimeInSeconds);
             });
 
             // Check that default component values are all correct
