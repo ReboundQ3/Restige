@@ -1993,3 +1993,11 @@ Entries:
       message: Added Empty Portal Frame
   id: 277
   time: '2026-08-22T07:47:58.0000000+00:00'
+- author: Onyx_The_Brave, HexReject
+  changes:
+    - type: Add
+      message: Added the CentComm armored winter coat
+    - type: Tweak
+      message: added a few clothing item from harmony back into the captain's loadouts
+  id: 278
+  time: '2026-08-28T12:31:59.0000000+00:00'
