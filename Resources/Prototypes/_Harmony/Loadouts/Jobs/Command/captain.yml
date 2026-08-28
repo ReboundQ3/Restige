@@ -13,11 +13,6 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitCaptainTurtleneckHarmony
 
-- type: loadout
-  id: CaptainJumpskirtTurtleneckHarmony
-  equipment:
-    jumpsuit: ClothingUniformJumpskirtCaptainTurtleneckHarmony
-
 - type: loadout # Harmony
   id: CaptainHawaiianHarmony
   equipment:

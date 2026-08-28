@@ -208,6 +208,7 @@
   - CaptainCap
   - CaptainTricorn #Added by Sector-Vestige
   - CaptainBeret #Added by Sector-Vestige
+  - BeretCaptainHarmony #Added by Harmony
 
 - type: loadoutGroup
   id: CaptainJumpsuit
@@ -217,6 +218,8 @@
   - CaptainJumpskirt
   - CaptainFormalSuit
   - CaptainFormalSkirt
+  - CaptainHawaiianHarmony #Added by Harmony
+  - CaptainJumpsuitTurtleneckHarmony #Added by Harmony
 
 - type: loadoutGroup
   id: CaptainNeck
@@ -241,6 +244,7 @@
   loadouts:
   - CaptainOuterClothing
   - CaptainWintercoat
+  - CaptainArmoredWinterCoatHarmony #Added by Harmony
 
 #- type: loadoutGroup
 #  id: CaptainJobTrinkets
