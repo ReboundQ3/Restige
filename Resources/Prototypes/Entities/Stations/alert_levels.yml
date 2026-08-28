@@ -15,5 +15,6 @@
     # Sector Vestige: fork-added alert levels (Cosmatic Drift + SV).
     - Amber
     - Bronze
+    - Delta
     - Omega
     - Silver

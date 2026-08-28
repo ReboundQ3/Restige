@@ -6,6 +6,10 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Ghost.Components;
 
+/// <summary>
+/// Represents an observer ghost.
+/// Handles limiting interactions, using ghost abilities, ghost visibility, and ghost warping.
+/// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedGhostSystem))]
 [AutoGenerateComponentState(true)]
 public sealed partial class GhostComponent : Component
@@ -54,7 +58,10 @@ public sealed partial class GhostComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan TimeOfDeath = TimeSpan.Zero;
 
-    [DataField("booRadius"), ViewVariables(VVAccess.ReadWrite)]
+    /// <summary>
+    /// Range of the Boo action.
+    /// </summary>
+    [DataField]
     public float BooRadius = 3;
 
     /// <summary>
@@ -63,37 +70,24 @@ public sealed partial class GhostComponent : Component
     [DataField]
     public int BooIntensity = 6;
 
-    // TODO: instead of this funny stuff just give it access and update in system dirtying when needed
-    [ViewVariables(VVAccess.ReadWrite)]
-    public bool CanGhostInteract
-    {
-        get => _canGhostInteract;
-        set
-        {
-            if (_canGhostInteract == value) return;
-            _canGhostInteract = value;
-            Dirty();
-        }
-    }
-
+    /// <summary>
+    /// Is this ghost allowed to interact with entities?
+    /// </summary>
+    /// <remarks>
+    /// Used to allow admins ghosts to interact with the world.
+    /// Changed by <see cref="SharedGhostSystem.SetCanGhostInteract"/>.
+    /// </remarks>
     [DataField("canInteract"), AutoNetworkedField]
-    private bool _canGhostInteract;
+    public bool CanGhostInteract;
 
     /// <summary>
-    ///     Changed by <see cref="SharedGhostSystem.SetCanReturnToBody"/>
+    /// Is this ghost player allowed to return to their original body?
     /// </summary>
-    // TODO MIRROR change this to use friend classes when thats merged
-    [ViewVariables(VVAccess.ReadWrite)]
-    public bool CanReturnToBody
-    {
-        get => _canReturnToBody;
-        set
-        {
-            if (_canReturnToBody == value) return;
-            _canReturnToBody = value;
-            Dirty();
-        }
-    }
+    /// <remarks>
+    /// Changed by <see cref="SharedGhostSystem.SetCanReturnToBody"/>.
+    /// </remarks>
+    [DataField, AutoNetworkedField]
+    public bool CanReturnToBody;
 
     /// <summary>
     /// Ghost color
@@ -101,9 +95,6 @@ public sealed partial class GhostComponent : Component
     /// <remarks>Used to allow admins to change ghost colors. Should be removed if the capability to edit existing sprite colors is ever added back.</remarks>
     [DataField, AutoNetworkedField]
     public Color Color = Color.White;
-
-    [DataField("canReturnToBody"), AutoNetworkedField]
-    private bool _canReturnToBody;
 }
 
 /// <summary>
