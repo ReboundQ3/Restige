@@ -35,7 +35,7 @@
     sprite: _SV/Clothing/OuterClothing/Coats/centcomm_admiralty.rsi
 
 - type: entity
-  parent: [ClothingOuterStorageBase, ClothingOuterWinterCoatToggleable,ClothingOuterArmorBaseCarapace]
+  parent: [ClothingOuterArmorBaseCarapace, ClothingOuterWinterCoatToggleable]
   id: ClothingOuterCoatCentCommArmoredWinterCoat
   name: CentComm armored winter coat
   description: An armored winter coat for a Central Commander.
