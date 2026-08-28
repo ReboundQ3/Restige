@@ -22,6 +22,7 @@
   - type: Clothing
     sprite: _SV/Clothing/OuterClothing/Coats/ayanian_admiralty.rsi
 
+#Centcomm cloths
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatCentCommAdmiral
@@ -32,6 +33,19 @@
     sprite: _SV/Clothing/OuterClothing/Coats/centcomm_admiralty.rsi
   - type: Clothing
     sprite: _SV/Clothing/OuterClothing/Coats/centcomm_admiralty.rsi
+
+- type: entity
+  parent: [ClothingOuterStorageBase, ClothingOuterWinterCoatToggleable,ClothingOuterArmorBaseCarapace]
+  id: ClothingOuterCoatCentCommArmoredWinterCoat
+  name: CentComm armored winter coat
+  description: An armored winter coat for a Central Commander.
+  components:
+  - type: Sprite
+    sprite: _SV/Clothing/OuterClothing/Coats/centcomm_armored_winter_coat.rsi
+  - type: Clothing
+    sprite: _SV/Clothing/OuterClothing/Coats/centcomm_armored_winter_coat.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodWinterCentcom
 
 #High-cut labcoat
 - type: entity
