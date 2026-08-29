@@ -1,4 +1,5 @@
 using Content.Shared.Maps;
+using Content.Shared.Silicons.Borgs.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Set;
@@ -20,4 +21,10 @@ public sealed partial class GameMapPoolPrototype : IPrototype
     /// </summary>
     [DataField("maps", customTypeSerializer:typeof(PrototypeIdHashSetSerializer<GameMapPrototype>), required: true)]
     public HashSet<string> Maps = new(0);
+
+    /// <summary>
+    /// SV - Defines which maps are selectable for play
+    /// <summary>
+    [DataField]
+    public bool Selectable = false;
 }
