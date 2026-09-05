@@ -24,7 +24,7 @@ namespace Content.Server._SV.GameTicking.Commands;
 /// <summary>
 /// SV - Starts a map vote between every map in a given <see cref="GameMapPoolPrototype"/>.
 /// The upstream map vote derives its options from the active preset or the game.map_pool CVar;
-/// this one lets an admin name the pool explicitly.
+/// this one lets an admin name the pool explicitly. Which is nice!
 /// </summary>
 [AdminCommand(AdminFlags.Round)]
 public sealed partial class MapVoteSVCommand : LocalizedEntityCommands
@@ -38,11 +38,6 @@ public sealed partial class MapVoteSVCommand : LocalizedEntityCommands
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IVoteManager _voteManager = default!;
     [Dependency] private GameTicker _gameTicker = default!;
-
-    /// <summary>
-    /// Pause between announcing a tie and opening the runoff, so players can read the result.
-    /// </summary>
-    private static readonly TimeSpan RunoffDelay = TimeSpan.FromSeconds(3);
 
     public override string Command => "mapvotesv";
 
@@ -84,7 +79,7 @@ public sealed partial class MapVoteSVCommand : LocalizedEntityCommands
         // Sort by display name so the vote buttons don't shuffle between rounds.
         maps.Sort((a, b) => string.Compare(a.MapName, b.MapName, StringComparison.OrdinalIgnoreCase));
 
-        StartVote(shell.Player, poolId, maps, runoff: 0);
+        StartVote(shell.Player, poolId, maps);
 
         shell.WriteLine(Loc.GetString("cmd-mapvotesv-started", ("pool", poolId), ("count", maps.Count)));
     }
@@ -93,19 +88,12 @@ public sealed partial class MapVoteSVCommand : LocalizedEntityCommands
     /// Opens a vote over <paramref name="maps"/>. <paramref name="runoff"/> is 0 for the initial
     /// vote and counts up once per tie-break re-run.
     /// </summary>
-    private void StartVote(ICommonSession? initiator, string poolId, List<GameMapPrototype> maps, int runoff)
+    private void StartVote(ICommonSession? initiator, string poolId, List<GameMapPrototype> maps)
     {
-        // A lone admin shouldn't have to sit out the full timer.
-        var alone = _playerManager.PlayerCount == 1 && initiator != null;
-
         var options = new VoteOptions
         {
-            Title = Loc.GetString(runoff > 0 ? "ui-vote-mapsv-title-runoff" : "ui-vote-mapsv-title"),
-            Duration = TimeSpan.FromSeconds(alone
-                ? _cfg.GetCVar(CCVars.VoteTimerAlone)
-                : runoff > 0
-                    ? _cfg.GetCVar(SVCCVars.MapVoteRunoffDuration)
-                    : _cfg.GetCVar(CCVars.VoteTimerMap)),
+            Title = Loc.GetString("ui-vote-mapsv-title"),
+            Duration = TimeSpan.FromSeconds(_cfg.GetCVar(SVCCVars.MapVoteDuration))
         };
 
         foreach (var map in maps)
@@ -116,48 +104,34 @@ public sealed partial class MapVoteSVCommand : LocalizedEntityCommands
         options.SetInitiatorOrServer(initiator);
 
         var vote = _voteManager.CreateVote(options);
-        vote.OnFinished += (_, args) => OnVoteFinished(args, initiator, poolId, runoff);
+        vote.OnFinished += (_, args) => OnVoteFinished(args, initiator, poolId);
 
         var mapNames = string.Join("; ", maps.Select(map => map.MapName));
-        var starter = runoff > 0
-            ? $"Runoff {runoff} of the SV map vote"
-            : $"{initiator?.ToString() ?? "The server"} started an SV map vote";
+        var starter = $"{initiator?.ToString() ?? "The server"} started an SV map vote";
         _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"{starter} for pool {poolId}: {mapNames}");
     }
 
-    private void OnVoteFinished(VoteFinishedEventArgs args, ICommonSession? initiator, string poolId, int runoff)
+    private void OnVoteFinished(VoteFinishedEventArgs args, ICommonSession? initiator, string poolId)
     {
-        if (args.Winner is GameMapPrototype outright)
+        if (args.Winner is GameMapPrototype map)
         {
-            ApplyResult(outright, Loc.GetString("ui-vote-mapsv-win", ("winner", outright.MapName)));
+            ApplyResult(map, Loc.GetString("ui-vote-mapsv-win", ("winner", map.MapName)));
             return;
         }
 
-        // Winner is null when several options tied for the top spot; they all land in Winners.
         var tied = args.Winners.Cast<GameMapPrototype>().ToList();
-
-        // If nobody cast a vote, every option "tied" on zero and a runoff would just reopen the
-        // exact same vote. That loops forever, so settle it here instead.
         var nobodyVoted = args.Votes.Count == 0 || args.Votes.Max() == 0;
 
-        // Once the lobby is too far along to change the map, a runoff can't accomplish anything.
-        // ApplyResult announces why below.
-        if (nobodyVoted || runoff >= _cfg.GetCVar(SVCCVars.MapVoteMaxRunoffs) || !_gameTicker.CanUpdateMap())
+        if (nobodyVoted || !_gameTicker.CanUpdateMap())
         {
-            var picked = (GameMapPrototype) _random.Pick(args.Winners);
-            ApplyResult(picked, Loc.GetString("ui-vote-mapsv-tie", ("picked", picked.MapName)));
+            Timer.Spawn(10, () => StartVote(initiator, poolId, tied));
             return;
         }
 
-        _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-mapsv-runoff",
-            ("maps", string.Join(", ", tied.Select(map => map.MapName)))));
-        _adminLogger.Add(LogType.Vote, LogImpact.Medium,
-            $"SV map vote tied between {string.Join("; ", tied.Select(map => map.MapName))}, starting runoff {runoff + 1}");
+        _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"SV map vote tied between {string.Join("; ", tied.Select(map => map.MapName))}, retrying vote");
 
-        // VoteManager.Update() is enumerating its vote dictionary when it fires this callback, and
-        // CreateVote adds to that same dictionary. Starting the runoff inline would throw, so it
-        // has to happen on a later tick.
-        Timer.Spawn(RunoffDelay, () => StartVote(initiator, poolId, tied, runoff + 1));
+        Timer.Spawn(10, () => StartVote(initiator, poolId, tied));
+
     }
 
     private void ApplyResult(GameMapPrototype picked, string announcement)
@@ -186,8 +160,6 @@ public sealed partial class MapVoteSVCommand : LocalizedEntityCommands
             return;
         }
 
-        // SelectMap only picks the map for the coming round. It deliberately does not write
-        // CCVars.GameMap the way forcemapsv does, so a vote result doesn't stick forever.
         _gameMapManager.SelectMap(picked.ID);
         _gameTicker.UpdateInfoText();
     }

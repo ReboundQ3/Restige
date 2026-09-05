@@ -32,16 +32,9 @@ public sealed class SVCCVars : CVars
         CharacterDocumentBinRetentionDays = CVarDef.Create("sv.character_documents.bin_retention_days", 30, CVar.SERVERONLY);
 
     /// <summary>
-    /// How long, in seconds, a mapvotesv tie-break runoff lasts. Shorter than the initial vote
-    /// because several runoffs have to fit inside what is left of the pre-round lobby.
+    /// How long, in seconds, mapvotesv lasts.
     /// </summary>
     public static readonly CVarDef<int>
-        MapVoteRunoffDuration = CVarDef.Create("sv.mapvote.runoff_duration", 30, CVar.SERVERONLY);
+        MapVoteDuration = CVarDef.Create("sv.mapvote.runoff_duration", 60, CVar.SERVERONLY);
 
-    /// <summary>
-    /// How many consecutive runoffs a mapvotesv tie may trigger before the winner is picked at
-    /// random from the maps still tied. Set to 0 to disable runoffs and always pick at random.
-    /// </summary>
-    public static readonly CVarDef<int>
-        MapVoteMaxRunoffs = CVarDef.Create("sv.mapvote.max_runoffs", 2, CVar.SERVERONLY);
 }

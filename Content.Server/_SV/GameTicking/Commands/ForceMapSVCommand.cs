@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Server.Administration;
+using Content.Server.GameTicking.Commands;
 using Content.Server.Maps;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
@@ -11,13 +12,13 @@ using Robust.Shared.Prototypes;
 namespace Content.Server._SV.GameTicking.Commands
 {
     [AdminCommand(AdminFlags.Round)]
-    public sealed partial class ForceMapSVCommand : LocalizedCommands
+    public sealed partial class ForceMapSVCommand : ForceMapCommand
     {
         [Dependency] private IConfigurationManager _configurationManager = default!;
         [Dependency] private IGameMapManager _gameMapManager = default!;
         [Dependency] private IPrototypeManager _prototypeManager = default!;
 
-        public override string Command => "forcemapsv";
+        //public override string Command => "forcemapsv";
 
         public override void Execute(IConsoleShell shell, string argStr, string[] args)
         {
