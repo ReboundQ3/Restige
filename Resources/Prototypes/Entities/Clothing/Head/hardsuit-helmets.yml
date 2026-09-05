@@ -25,8 +25,6 @@
       head-vox:
       - state: equipped-head-light-vox
         shader: unshaded
-      head-foxfolk:
-      - state: equipped-head-light-foxfolk
       head-vulpkanin:
       - state: equipped-head-light-vulpkanin
         shader: unshaded
@@ -43,9 +41,6 @@
       - state: equipped-head-vox
       - state: equipped-head-unshaded-vox
         shader: unshaded
-      head-foxfolk:
-      - state: equipped-head-foxfolk
-      - state: equipped-head-unshaded-foxfolk
       head-vulpkanin:
       - state: equipped-head-vulpkanin
       - state: equipped-head-unshaded-vulpkanin
@@ -108,8 +103,6 @@
       head-vox:
       - state: equipped-head-light-vox
         shader: unshaded
-      head-foxfolk:
-      - state: equipped-head-light-foxfolk
       head-vulpkanin:
       - state: equipped-head-light-vulpkanin
         shader: unshaded
@@ -126,9 +119,6 @@
       - state: equipped-head-vox
       - state: equipped-head-unshaded-vox
         shader: unshaded
-      head-foxfolk:
-      - state: equipped-head-foxfolk
-      - state: equipped-head-unshaded-foxfolk
       head-vulpkanin:
       - state: equipped-head-vulpkanin
       - state: equipped-head-unshaded-vulpkanin
