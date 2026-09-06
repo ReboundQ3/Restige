@@ -8,7 +8,7 @@ using Content.Server.Voting;
 using Content.Server.Voting.Managers;
 using Content.Shared._SV.CCVar;
 using Content.Shared.Administration;
-using Content.Shared.CCVar;
+using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Maps;
 using Robust.Server.Player;
@@ -38,8 +38,10 @@ public sealed partial class MapVoteSVCommand : LocalizedEntityCommands
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IVoteManager _voteManager = default!;
     [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ILocalizationManager _localizationManager = default!;
 
     public override string Command => "mapvotesv";
+    public const string Highlightcolor = "#30d5c8";
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
@@ -75,8 +77,6 @@ public sealed partial class MapVoteSVCommand : LocalizedEntityCommands
             return;
         }
 
-        // GameMapPoolPrototype.Maps is a HashSet, so its iteration order isn't stable.
-        // Sort by display name so the vote buttons don't shuffle between rounds.
         maps.Sort((a, b) => string.Compare(a.MapName, b.MapName, StringComparison.OrdinalIgnoreCase));
 
         StartVote(shell.Player, poolId, maps);
@@ -92,7 +92,7 @@ public sealed partial class MapVoteSVCommand : LocalizedEntityCommands
     {
         var options = new VoteOptions
         {
-            Title = Loc.GetString("ui-vote-mapsv-title"),
+            Title = _localizationManager.GetString("ui-vote-mapsv-title", ("highlightcolor", Highlightcolor)),
             Duration = TimeSpan.FromSeconds(_cfg.GetCVar(SVCCVars.MapVoteDuration))
         };
 
@@ -115,7 +115,20 @@ public sealed partial class MapVoteSVCommand : LocalizedEntityCommands
     {
         if (args.Winner is GameMapPrototype map)
         {
-            ApplyResult(map, Loc.GetString("ui-vote-mapsv-win", ("winner", map.MapName)));
+            Announce(Loc.GetString("ui-vote-mapsv-win", ("winner", map.MapName), ("highlightcolor", Highlightcolor)));
+            _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"SV map vote finished: {map.MapName}");
+
+            if (!_gameTicker.CanUpdateMap())
+                return;
+
+            if (!_gameMapManager.CheckMapExists(map.ID))
+            {
+                Announce(Loc.GetString("ui-vote-mapsv-invalid", ("winner", map.MapName)));
+                return;
+            }
+
+            _gameMapManager.SelectMap(map.ID);
+            _gameTicker.UpdateInfoText();
             return;
         }
 
@@ -134,34 +147,10 @@ public sealed partial class MapVoteSVCommand : LocalizedEntityCommands
 
     }
 
-    private void ApplyResult(GameMapPrototype picked, string announcement)
+    private void Announce(string message)
     {
-        _chatManager.DispatchServerAnnouncement(announcement);
-        _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"SV map vote finished: {picked.MapName}");
-
-        if (!_gameTicker.CanUpdateMap())
-        {
-            if (_gameTicker.RoundPreloadTime <= TimeSpan.Zero)
-            {
-                _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-mapsv-notlobby"));
-            }
-            else
-            {
-                var timeString = $"{_gameTicker.RoundPreloadTime.Minutes:0}:{_gameTicker.RoundPreloadTime.Seconds:00}";
-                _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-mapsv-notlobby-time", ("time", timeString)));
-            }
-
-            return;
-        }
-
-        if (!_gameMapManager.CheckMapExists(picked.ID))
-        {
-            _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-mapsv-invalid", ("winner", picked.MapName)));
-            return;
-        }
-
-        _gameMapManager.SelectMap(picked.ID);
-        _gameTicker.UpdateInfoText();
+        var wrapped = Loc.GetString("chat-manager-server-wrap-message", ("message", message));
+        _chatManager.ChatMessageToAll(ChatChannel.Server, message, wrapped, default, false, true);
     }
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)

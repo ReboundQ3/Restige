@@ -35,6 +35,6 @@ public sealed class SVCCVars : CVars
     /// How long, in seconds, mapvotesv lasts.
     /// </summary>
     public static readonly CVarDef<int>
-        MapVoteDuration = CVarDef.Create("sv.mapvote.runoff_duration", 60, CVar.SERVERONLY);
+        MapVoteDuration = CVarDef.Create("sv.mapvote.runoff_duration", 150, CVar.SERVERONLY);
 
 }

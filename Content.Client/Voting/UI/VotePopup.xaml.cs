@@ -56,7 +56,7 @@ namespace Content.Client.Voting.UI
 
         public void UpdateData()
         {
-            VoteTitle.SetMessage(FormattedMessage.FromUnformatted(_vote.Title));
+            VoteTitle.SetMessage(FormattedMessage.FromMarkupPermissive(_vote.Title)); // SV - Add markup
             VoteCaller.Text = Loc.GetString("ui-vote-created", ("initiator", _vote.Initiator));
 
             for (var i = 0; i < _voteButtons.Length; i++)
