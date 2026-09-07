@@ -8,6 +8,7 @@ using Content.Server.Voting;
 using Content.Server.Voting.Managers;
 using Content.Shared._SV.CCVar;
 using Content.Shared.Administration;
+using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Maps;
@@ -123,6 +124,9 @@ public sealed partial class MapVoteSVCommand : LocalizedEntityCommands
                 Announce(Loc.GetString("ui-vote-mapsv-invalid", ("winner", map.MapName)));
                 return;
             }
+
+            if (!string.IsNullOrEmpty(_cfg.GetCVar(CCVars.GameMap)))
+                _cfg.SetCVar(CCVars.GameMap, string.Empty);
 
             _gameMapManager.SelectMap(map.ID);
             _gameTicker.UpdateInfoText();
