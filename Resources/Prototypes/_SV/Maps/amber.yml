@@ -8,6 +8,7 @@
   id: Amber
   mapName: 'Amber'
   mapPath: /Maps/_SV/amber.yml
+  preview: /Textures/_SV/MapPreviews/amber.png # SV
   minPlayers: 15
   maxPlayers: 60
   stations:

@@ -84,10 +84,6 @@ public sealed partial class MapVoteSVCommand : LocalizedEntityCommands
         shell.WriteLine(Loc.GetString("cmd-mapvotesv-started", ("pool", poolId), ("count", maps.Count)));
     }
 
-    /// <summary>
-    /// Opens a vote over <paramref name="maps"/>. <paramref name="runoff"/> is 0 for the initial
-    /// vote and counts up once per tie-break re-run.
-    /// </summary>
     private void StartVote(ICommonSession? initiator, string poolId, List<GameMapPrototype> maps)
     {
         var options = new VoteOptions
@@ -99,6 +95,7 @@ public sealed partial class MapVoteSVCommand : LocalizedEntityCommands
         foreach (var map in maps)
         {
             options.Options.Add((map.MapName, map));
+            options.OptionIcons.Add(map.Preview?.ToString());
         }
 
         options.SetInitiatorOrServer(initiator);

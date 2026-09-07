@@ -25,6 +25,7 @@
   id: Bagel
   mapName: 'Bagel Station'
   mapPath: /Maps/bagel.yml
+  preview: /Textures/_SV/MapPreviews/bagel.png # SV
   minPlayers: 25 #CD change
   maxPlayers: 55 #CD change
   stations:

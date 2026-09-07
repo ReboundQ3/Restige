@@ -27,6 +27,7 @@
   id: Plasma
   mapName: 'Plasma'
   mapPath: /Maps/plasma.yml
+  preview: /Textures/_SV/MapPreviews/plasma.png # SV
   minPlayers: 30
   maxPlayers: 80
   stations:

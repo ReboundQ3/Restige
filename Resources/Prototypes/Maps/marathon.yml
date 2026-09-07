@@ -28,6 +28,7 @@
   id: Marathon
   mapName: 'Marathon Station'
   mapPath: /Maps/marathon.yml
+  preview: /Textures/_SV/MapPreviews/marathon.png # SV
   minPlayers: 35
   maxPlayers: 70
   stations:
