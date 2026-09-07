@@ -2,7 +2,6 @@ using Content.Shared.Maps;
 using Content.Shared.Silicons.Borgs.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Set;
 
 namespace Content.Server.Maps;
 
@@ -27,4 +26,7 @@ public sealed partial class GameMapPoolPrototype : IPrototype
     /// <summary>
     [DataField]
     public bool Selectable = false;
+    
+    [DataField(required: true)]
+    public HashSet<ProtoId<GameMapPrototype>> Maps = new(0);
 }
