@@ -1,16 +1,4 @@
-// SPDX-FileCopyrightText: 2026 Wizards Den contributors
-// SPDX-FileCopyrightText: 2026 Sector Vestige contributors (modifications)
-// SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2026 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2026 ReboundQ3 <22770594+ReboundQ3@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Maps;
-using Content.Shared.Silicons.Borgs.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 
@@ -29,15 +17,13 @@ public sealed partial class GameMapPoolPrototype : IPrototype
     /// <summary>
     ///     Which maps are in this pool.
     /// </summary>
-    [DataField("maps", customTypeSerializer:typeof(PrototypeIdHashSetSerializer<GameMapPrototype>), required: true)]
-    public HashSet<string> Maps = new(0);
+    [DataField(required: true)]
+    public HashSet<ProtoId<GameMapPrototype>> Maps = new(0);
 
     /// <summary>
     /// SV - Defines which maps are selectable for play
     /// <summary>
     [DataField]
     public bool Selectable = false;
-    
-    [DataField(required: true)]
-    public HashSet<ProtoId<GameMapPrototype>> Maps = new(0);
+
 }
