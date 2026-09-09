@@ -1979,3 +1979,9 @@ Entries:
       message: Document character limit changed to 16384.
   id: 279
   time: '2026-08-29T11:52:48.0000000+00:00'
+- author: ReboundQ3
+  changes:
+    - type: Fix
+      message: hardsuits for foxfolk have been fixed.
+  id: 280
+  time: '2026-09-09T19:46:47.0000000+00:00'
