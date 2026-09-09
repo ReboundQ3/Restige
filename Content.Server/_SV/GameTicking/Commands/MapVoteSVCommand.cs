@@ -18,6 +18,7 @@ using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Maps;
+using Content.Shared.Mobs;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
@@ -136,6 +137,7 @@ public sealed partial class MapVoteSVCommand : LocalizedEntityCommands
 
             _gameMapManager.SelectMap(map.ID);
             _gameTicker.UpdateInfoText();
+            _cfg.SetCVar(CCVars.GameMap, map.ID);
             return;
         }
 
