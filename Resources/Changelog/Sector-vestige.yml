@@ -1993,3 +1993,9 @@ Entries:
       message: Made mapvotes have a preview.
   id: 281
   time: '2026-09-10T14:39:43.0000000+00:00'
+- author: lambdatiger
+  changes:
+    - type: Fix
+      message: Fixed Amber airlock, firelock, and blastdoor alignment.
+  id: 282
+  time: '2026-09-11T15:22:29.0000000+00:00'
