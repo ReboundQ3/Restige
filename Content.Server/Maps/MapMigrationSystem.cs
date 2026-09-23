@@ -28,19 +28,22 @@ namespace Content.Server.Maps;
 
 /// <summary>
 ///     Performs basic map migration operations by listening for engine <see cref="MapLoaderSystem"/> events.
+///     SV - This whole file has been edited to suit our needs.
 /// </summary>
 public sealed partial class MapMigrationSystem : EntitySystem
 {
     [Dependency] private IResourceManager _resMan = default!;
 
     /// <summary>
-    ///     SV - Migration files are read in order. A later file overrides an earlier one for the same prototype id.
+    ///     SV - The upstream migration file. Always read first so fork files can override it.
     /// </summary>
-    private static readonly ResPath[] MigrationFiles =
-    [
-        new("/migration.yml"),
-        new("/_SV/migration.yml"),
-    ];
+    private static readonly ResPath UpstreamMigrationFile = new("/migration.yml");
+
+    /// <summary>
+    ///     SV - Every .yml file under this directory is read as a migration file, sorted by path.
+    ///     A later file overrides an earlier one for the same prototype id.
+    /// </summary>
+    private static readonly ResPath ForkMigrationDirectory = new("/_SV/migrations/");
 
     public override void Initialize()
     {
@@ -66,7 +69,7 @@ public sealed partial class MapMigrationSystem : EntitySystem
     {
         var mappings = new Dictionary<string, string>();
 
-        foreach (var path in MigrationFiles)
+        foreach (var path in GetMigrationFiles())
         {
             if (!_resMan.TryContentFileRead(path, out var stream))
                 continue;
@@ -90,6 +93,22 @@ public sealed partial class MapMigrationSystem : EntitySystem
         }
 
         return mappings;
+    }
+
+    /// <summary>
+    /// SV - The upstream file followed by every fork migration file, in a stable order.
+    /// </summary>
+    private IEnumerable<ResPath> GetMigrationFiles()
+    {
+        yield return UpstreamMigrationFile;
+
+        // ContentFindFiles is recursive and makes no ordering guarantee, so sort for deterministic overrides.
+        var forkFiles = _resMan.ContentFindFiles(ForkMigrationDirectory)
+            .Where(path => path.Extension == "yml")
+            .OrderBy(path => path.ToString(), StringComparer.Ordinal);
+
+        foreach (var path in forkFiles)
+            yield return path;
     }
 
     /// <summary>
