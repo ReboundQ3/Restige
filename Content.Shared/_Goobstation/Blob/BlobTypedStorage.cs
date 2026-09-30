@@ -3,7 +3,7 @@
 using System.Collections;
 using System.Diagnostics.Contracts;
 using Content.Shared._Goobstation.Blob.Components;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Goobstation.Blob;
