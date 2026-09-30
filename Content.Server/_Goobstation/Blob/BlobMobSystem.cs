@@ -11,7 +11,6 @@ using Robust.Shared.Network;
 using Content.Server._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Events;
-using Content.Shared._Shitmed.Targeting;
 
 namespace Content.Server._Goobstation.Blob;
 
@@ -109,5 +108,5 @@ public sealed class BlobMobSystem : SharedBlobMobSystem
     }
 
     private void OnPulsed(EntityUid uid, BlobMobComponent component, BlobMobGetPulseEvent args) =>
-        _damageableSystem.TryChangeDamage(uid, component.HealthOfPulse, targetPart: TargetBodyPart.All);
+        _damageableSystem.TryChangeDamage(uid, component.HealthOfPulse);
 }
