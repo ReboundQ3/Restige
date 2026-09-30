@@ -20,7 +20,7 @@ using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
-using Content.Shared._Starlight.CollectiveMind;
+using Content.Shared.Radio.Components;
 using Content.Shared.Tag;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Trigger.Systems;
@@ -195,6 +195,8 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
 
         _tagSystem.RemoveTag(uid, "BlobMob");
 
+        RemoveHivemind(uid, component);
+
         /*
         var mindComp = EnsureComp<MindContainerComponent>(uid);
         if (mindComp.Mind != null)
@@ -227,12 +229,35 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
         }
     }
 
+    /// <summary>
+    /// Takes away the hivemind radio channel given by the blob pod, and any radio components that came with it.
+    /// </summary>
+    private void RemoveHivemind(EntityUid uid, ZombieBlobComponent component)
+    {
+        if (TryComp<IntrinsicRadioTransmitterComponent>(uid, out var transmitter))
+        {
+            if (component.AddedTransmitter)
+                RemComp(uid, transmitter);
+            else
+                transmitter.Channels.Remove(component.HivemindChannel);
+        }
+
+        if (TryComp<ActiveRadioComponent>(uid, out var activeRadio))
+        {
+            if (component.AddedActiveRadio)
+                RemComp(uid, activeRadio);
+            else
+                activeRadio.Channels.Remove(component.HivemindChannel);
+        }
+
+        if (component.AddedReceiver)
+            RemComp<IntrinsicRadioReceiverComponent>(uid);
+    }
+
     private void OnMobStateChanged(EntityUid uid, ZombieBlobComponent component, MobStateChangedEvent args)
     {
         if (args.NewMobState == MobState.Dead)
         {
-            if (TryComp<CollectiveMindComponent>(uid, out var comp))
-                comp.Channels.Remove(component.CollectiveMindAdded);
             RemComp<ZombieBlobComponent>(uid);
         }
     }

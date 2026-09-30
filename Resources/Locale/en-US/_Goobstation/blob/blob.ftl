@@ -38,7 +38,7 @@ objective-issuer-blob = Blob
 
 
 ghost-role-information-blobbernaut-name = Blobbernaut
-ghost-role-information-blobbernaut-description = You are a Blobbernaut. You must defend the blob core. Use + or +e in chat to talk in the Blobmind.
+ghost-role-information-blobbernaut-description = You are a Blobbernaut. You must defend the blob core. Use :l in chat to talk in the Blobmind.
 
 ghost-role-information-blob-name = Blob
 ghost-role-information-blob-description = You are the Blob Infection. Consume the station.
@@ -155,8 +155,8 @@ blob-role-greeting =
         Use Alt+LMB to upgrade normal blob tiles to strong blob and strong blob to reflective blob.
         Make sure to place resource blobs to generate resources.
         Keep in mind that resource blobs and factories will only work when next to node blobs or cores.
-        You may use + or +e in chat to use the Blobmind to talk to your minions.
-blob-zombie-greeting = You were infected and raised by a blob spore. Now you must help the blob take over the station. Use +e in chat to talk in the Blobmind.
+        You may use :l in chat to use the Blobmind to talk to your minions.
+blob-zombie-greeting = You were infected and raised by a blob spore. Now you must help the blob take over the station. Use :l in chat to talk in the Blobmind.
 
 # End round
 blob-round-end-result =

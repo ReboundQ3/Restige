@@ -160,12 +160,15 @@
 - type: Tag
   id: Blobbernaut
 
-# --- from _Goobstation/CollectiveMind/collective_minds.yml (Restige has no CollectiveMind system)
-- type: collectiveMind
+# Replaces Goob's Blobmind collectiveMind (_Goobstation/CollectiveMind/collective_minds.yml) with an upstream radio channel.
+- type: radioChannel
   id: Blobmind
-  name: collective-mind-blobmind
-  keycode: 'e'
+  name: chat-radio-blobmind
+  keycode: 'l'
+  frequency: 200.5
   color: "#637b19"
+  # long range so the hivemind works anywhere, independent of telecomms
+  longRange: true
 
 # --- from _Goobstation/Effects/heal.yml (only the parts blob uses)
 - type: entity

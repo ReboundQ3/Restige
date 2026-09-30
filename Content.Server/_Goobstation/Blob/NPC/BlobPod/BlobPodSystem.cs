@@ -18,10 +18,12 @@ using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Rejuvenate;
-using Content.Shared._Starlight.CollectiveMind;
+using Content.Shared.Radio;
+using Content.Shared.Radio.Components;
 using Robust.Server.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._Goobstation.Blob.NPC.BlobPod;
 
@@ -64,16 +66,29 @@ public sealed class BlobPodSystem : SharedBlobPodSystem
         if(args.Container.ID != "head")
             return;
 
-        if (!HasComp<HumanoidAppearanceComponent>(args.Container.Owner) || !HasComp<ZombieBlobComponent>(args.Container.Owner))
+        if (!HasComp<HumanoidProfileComponent>(args.Container.Owner) || !HasComp<ZombieBlobComponent>(args.Container.Owner))
             return;
-
-        if (!TryComp<ZombieBlobComponent>(args.Container.Owner, out var zombieBlob))
-            return;
-
-        if (TryComp<CollectiveMindComponent>(args.Container.Owner, out var mind))
-            mind.Channels.Remove(zombieBlob.CollectiveMindAdded);
 
         RemCompDeferred<ZombieBlobComponent>(args.Container.Owner);
+    }
+
+    /// <summary>
+    /// Gives a zombified entity the blob hivemind radio channel. ZombieBlobSystem takes it away again on shutdown.
+    /// </summary>
+    private void AddHivemind(Entity<ZombieBlobComponent> zombie, ProtoId<RadioChannelPrototype> channel)
+    {
+        zombie.Comp.HivemindChannel = channel;
+
+        // A freshly added transmitter defaults to Common, which a zombie shouldn't get for free.
+        zombie.Comp.AddedTransmitter = !EnsureComp<IntrinsicRadioTransmitterComponent>(zombie, out var transmitter);
+        if (zombie.Comp.AddedTransmitter)
+            transmitter.Channels.Clear();
+        transmitter.Channels.Add(channel);
+
+        zombie.Comp.AddedActiveRadio = !EnsureComp<ActiveRadioComponent>(zombie, out var activeRadio);
+        activeRadio.Channels.Add(channel);
+
+        zombie.Comp.AddedReceiver = !EnsureComp<IntrinsicRadioReceiverComponent>(zombie, out _);
     }
 
     private void OnDestruction(EntityUid uid, BlobPodComponent component, DestructionEventArgs args)
@@ -121,8 +136,7 @@ public sealed class BlobPodSystem : SharedBlobPodSystem
         ent.Comp.ZombifiedEntityUid = target;
 
         var zombieBlob = EnsureComp<ZombieBlobComponent>(target);
-        EnsureComp<CollectiveMindComponent>(target).Channels.Add(ent.Comp.CollectiveMind);
-        zombieBlob.CollectiveMindAdded = ent.Comp.CollectiveMind;
+        AddHivemind((target, zombieBlob), ent.Comp.HivemindChannel);
         zombieBlob.BlobPodUid = ent;
         if (HasComp<ActorComponent>(ent))
         {
@@ -155,7 +169,7 @@ public sealed class BlobPodSystem : SharedBlobPodSystem
     {
         if (!Resolve(uid, ref component))
             return false;
-        if (!HasComp<HumanoidAppearanceComponent>(target))
+        if (!HasComp<HumanoidProfileComponent>(target))
             return false;
         if (_mobs.IsAlive(target))
             return false;

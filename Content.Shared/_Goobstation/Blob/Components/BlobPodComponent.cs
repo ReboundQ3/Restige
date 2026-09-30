@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Starlight.CollectiveMind;
+using Content.Shared.Radio;
 using Content.Shared.Tag;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
@@ -36,5 +36,5 @@ public sealed partial class BlobPodComponent : Component
     public EntityUid? ZombifyTarget;
 
     [DataField]
-    public ProtoId<CollectiveMindPrototype> CollectiveMind = "Blobmind";
+    public ProtoId<RadioChannelPrototype> HivemindChannel = "Blobmind";
 }

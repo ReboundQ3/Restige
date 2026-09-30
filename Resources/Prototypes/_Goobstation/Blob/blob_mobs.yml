@@ -31,8 +31,11 @@
       tags:
         - HidesHair
         - BlobMob
-    - type: CollectiveMind
-      defaultChannel: Blobmind
+    - type: IntrinsicRadioReceiver
+    - type: IntrinsicRadioTransmitter
+      channels:
+      - Blobmind
+    - type: ActiveRadio
       channels:
       - Blobmind
     - type: IngestionBlocker
@@ -130,8 +133,11 @@
       tags:
         - Blobbernaut
         - BlobMob
-    - type: CollectiveMind
-      defaultChannel: Blobmind
+    - type: IntrinsicRadioReceiver
+    - type: IntrinsicRadioTransmitter
+      channels:
+      - Blobmind
+    - type: ActiveRadio
       channels:
       - Blobmind
     - type: GhostRole
@@ -298,7 +304,10 @@
     - type: Tag
       tags:
       - BypassInteractionRangeChecks
-    - type: CollectiveMind
-      defaultChannel: Blobmind
+    - type: IntrinsicRadioReceiver
+    - type: IntrinsicRadioTransmitter
+      channels:
+      - Blobmind
+    - type: ActiveRadio
       channels:
       - Blobmind

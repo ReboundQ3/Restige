@@ -18,7 +18,7 @@ public abstract class SharedBlobPodSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobs = default!;
 
 
-    private EntityQuery<HumanoidAppearanceComponent> _query;
+    private EntityQuery<HumanoidProfileComponent> _query;
 
     public override void Initialize()
     {
@@ -29,7 +29,7 @@ public abstract class SharedBlobPodSystem : EntitySystem
         SubscribeLocalEvent<BlobPodComponent, CanDropTargetEvent>(OnCanDragDropOn);
         SubscribeLocalEvent<BlobPodComponent, DragDropTargetEvent>(OnBlobPodDragDrop);
 
-        _query = GetEntityQuery<HumanoidAppearanceComponent>();
+        _query = GetEntityQuery<HumanoidProfileComponent>();
     }
 
     private void OnBlobPodDragDrop(Entity<BlobPodComponent> ent, ref DragDropTargetEvent args)
