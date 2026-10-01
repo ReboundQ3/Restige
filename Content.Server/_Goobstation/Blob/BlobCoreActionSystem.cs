@@ -3,7 +3,7 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Content.Goobstation.Common.CCVar;
+using Content.Shared._Goobstation.CCVar;
 using Content.Shared._Goobstation.Blob;
 using Content.Shared._Goobstation.Blob.Components;
 using Content.Shared.Atmos.Components;

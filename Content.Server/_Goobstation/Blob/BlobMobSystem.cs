@@ -31,7 +31,7 @@ public sealed class BlobMobSystem : SharedBlobMobSystem
     /// </summary>
     private void OnTransformSpeech(Entity<BlobSpeakComponent> ent, ref TransformSpeechEvent args)
     {
-        if (args.Channel?.ID == ent.Comp.HivemindChannel)
+        if (args.Channel != null && args.Channel.ID == ent.Comp.HivemindChannel.Id)
             return;
 
         args.Message = _accent.ApplyReplacements(args.Message, ent.Comp.Accent, ent);
