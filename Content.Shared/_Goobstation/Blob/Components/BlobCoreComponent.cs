@@ -55,7 +55,7 @@ public sealed partial class BlobCoreComponent : Component
     #region Damage Specifiers
 
     [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    public BlobChemDamage ChemDamageDict { get; set; } = new()
+    public Dictionary<BlobChemType, DamageSpecifier> ChemDamageDict { get; set; } = new()
     {
         {
             BlobChemType.BlazingOil, new DamageSpecifier()

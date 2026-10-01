@@ -3,14 +3,13 @@
 using System.Collections;
 using System.Diagnostics.Contracts;
 using Content.Shared._Goobstation.Blob.Components;
-using Content.Shared.Damage;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._Goobstation.Blob;
 
 #region BlobChemTypedStorage
 [DataDefinition, Serializable, NetSerializable]
-public abstract partial class BlobChemTypedStorage<T> : IEnumerable
+public abstract partial class BlobChemTypedStorage<T> : IEnumerable where T : struct
 {
     [DataField]
     public virtual T BlazingOil { get; set; } = default!;
@@ -118,12 +117,6 @@ public abstract partial class BlobChemTypedStorage<T> : IEnumerable
 
 [DataDefinition, Serializable, NetSerializable]
 public sealed partial class BlobChemColors : BlobChemTypedStorage<Color>
-{
-
-}
-
-[DataDefinition, Serializable, NetSerializable]
-public sealed partial class BlobChemDamage : BlobChemTypedStorage<DamageSpecifier>
 {
 
 }
