@@ -123,9 +123,6 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
         _faction.AddFaction(uid, "Blob");
         component.OldFactions = oldFactions;
 
-        // var accent = EnsureComp<ReplacementAccentComponent>(uid); // Languages - No need for accents.
-        // accent.Accent = "genericAggressive";
-
         _tagSystem.AddTag(uid, "BlobMob");
 
         EnsureComp<PressureImmunityComponent>(uid);
@@ -185,7 +182,6 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
         RemComp<BlobSpeakComponent>(uid);
         RemComp<BlobMobComponent>(uid);
         RemComp<HTNComponent>(uid);
-        // RemComp<ReplacementAccentComponent>(uid); // Languages - No need for accents.
         RemComp<PressureImmunityComponent>(uid);
 
         if (TryComp<TemperatureDamageComponent>(uid, out var temperatureDamageComponent) && component.OldColdDamageThreshold != null)

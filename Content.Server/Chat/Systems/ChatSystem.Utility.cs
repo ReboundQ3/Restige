@@ -3,6 +3,7 @@ using System.Text;
 using Content.Shared.Chat;
 using Content.Shared.Ghost.Components;
 using Content.Shared.Players;
+using Content.Shared.Radio; // SV - blob
 using Content.Shared.Speech.Prototypes;
 using Robust.Shared.Console;
 using Robust.Shared.Network;
@@ -132,9 +133,9 @@ public sealed partial class ChatSystem
         return newMessage;
     }
 
-    public string TransformSpeech(EntityUid sender, string message)
+    public string TransformSpeech(EntityUid sender, string message, RadioChannelPrototype? channel = null) // SV - blob: channel
     {
-        var ev = new TransformSpeechEvent(sender, message);
+        var ev = new TransformSpeechEvent(sender, message, channel); // SV - blob: channel
         RaiseLocalEvent(sender, ev, true);
 
         return ev.Message;

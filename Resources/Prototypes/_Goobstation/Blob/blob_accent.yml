@@ -1,0 +1,11 @@
+# Replaces Goob's Einstein Engines "Blob" language: blob mobs sound like this to everyone nearby,
+# while the Blobmind radio channel keeps their real words (see BlobMobSystem).
+- type: accent
+  id: blob
+  fullReplacements:
+  - accent-words-blob-1
+  - accent-words-blob-2
+  - accent-words-blob-3
+  - accent-words-blob-4
+  - accent-words-blob-5
+  - accent-words-blob-6

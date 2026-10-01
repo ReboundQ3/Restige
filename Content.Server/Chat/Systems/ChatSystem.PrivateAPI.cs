@@ -97,7 +97,7 @@ public sealed partial class ChatSystem
         if (!_actionBlocker.CanSpeak(source, isWhisper: true) && !ignoreActionBlocker) // SV pass isWhisper is true so that the Hypophoniasystem works #355
             return;
 
-        var message = TransformSpeech(source, FormattedMessage.RemoveMarkupOrThrow(originalMessage));
+        var message = TransformSpeech(source, FormattedMessage.RemoveMarkupOrThrow(originalMessage), channel); // SV - blob: pass channel so accents can skip radio
         if (message.Length == 0)
             return;
 

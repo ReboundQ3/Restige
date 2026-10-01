@@ -33,10 +33,16 @@ public sealed class TransformSpeechEvent : CancellableEntityEventArgs, IInventor
     public EntityUid Sender;
     public string Message;
 
-    public TransformSpeechEvent(EntityUid sender, string message)
+    /// <summary>
+    /// Radio channel the message is being sent on, or null for local speech.
+    /// </summary>
+    public RadioChannelPrototype? Channel; // SV - blob
+
+    public TransformSpeechEvent(EntityUid sender, string message, RadioChannelPrototype? channel = null) // SV - blob: channel
     {
         Sender = sender;
         Message = message;
+        Channel = channel; // SV - blob
     }
 }
 
