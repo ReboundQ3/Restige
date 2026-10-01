@@ -6,6 +6,7 @@ using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.Speech;
 using Content.Shared.Speech.EntitySystems;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Server._Goobstation.Blob;
 

@@ -22,6 +22,7 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Objectives.Components;
 using Robust.Server.Player;
 using Robust.Shared.Player;
+using Content.Shared.AlertLevel;
 
 namespace Content.Server._Goobstation.Blob.GameTicking;
 

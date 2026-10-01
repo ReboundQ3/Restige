@@ -12,6 +12,7 @@ using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Server.GameObjects;
 using Robust.Shared.Random;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Server._Goobstation.Blob;
 

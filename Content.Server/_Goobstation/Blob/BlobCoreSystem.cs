@@ -35,6 +35,8 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Content.Shared.Damage.Systems;
+using Content.Shared.AlertLevel;
 
 namespace Content.Server._Goobstation.Blob;
 

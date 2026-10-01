@@ -10,7 +10,6 @@ using Content.Server.Mind;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
-using Content.Server.Speech.Components;
 using Content.Server.Temperature.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Inventory;

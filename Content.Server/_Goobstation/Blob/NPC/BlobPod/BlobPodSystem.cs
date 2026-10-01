@@ -24,6 +24,7 @@ using Robust.Server.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Server._Goobstation.Blob.NPC.BlobPod;
 

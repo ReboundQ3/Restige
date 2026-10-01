@@ -24,6 +24,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Server._Goobstation.Blob;
 
