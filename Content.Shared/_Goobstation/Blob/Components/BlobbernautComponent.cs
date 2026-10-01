@@ -2,6 +2,8 @@
 
 using Content.Shared._Goobstation.Blob;
 using Content.Shared.Damage;
+using Robust.Shared.Prototypes;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
@@ -23,7 +25,7 @@ public sealed partial class BlobbernautComponent : Component
     [ViewVariables(VVAccess.ReadOnly), DataField("damage")]
     public DamageSpecifier Damage = new()
     {
-        DamageDict = new Dictionary<string, FixedPoint2>
+        DamageDict = new Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2>
         {
             { "Piercing", 25 },
         }

@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage;
+using Robust.Shared.Prototypes;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
@@ -24,7 +26,7 @@ public sealed partial class BlobTileComponent : Component
     [DataField]
     public DamageSpecifier HealthOfPulse = new()
     {
-        DamageDict = new Dictionary<string, FixedPoint2>
+        DamageDict = new Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2>
         {
             { "Blunt", -4 },
             { "Slash", -4 },
@@ -38,7 +40,7 @@ public sealed partial class BlobTileComponent : Component
     [DataField]
     public DamageSpecifier FlashDamage = new()
     {
-        DamageDict = new Dictionary<string, FixedPoint2>
+        DamageDict = new Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2>
         {
             { "Heat", 24 },
         }
