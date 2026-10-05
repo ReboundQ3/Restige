@@ -30,22 +30,24 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Content.Server.Atmos.EntitySystems;
 
 namespace Content.Server._Goobstation.Blob;
 
 public sealed class ZombieBlobSystem : SharedZombieBlobSystem
 {
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IChatManager _chatMan = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly TriggerSystem _trigger = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private NpcFactionSystem _faction = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IChatManager _chatMan = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private BarotraumaSystem _barotrauma = default!;
 
     private const int ClimbingCollisionGroup = (int) (CollisionGroup.BlobImpassable);
 
@@ -68,6 +70,7 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
         SubscribeLocalEvent<ZombieBlobComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<ZombieBlobComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<ZombieBlobComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<ZombieBlobComponent, RefreshPressureImmunityEvent>(OnRefreshPressureImmunity);
         SubscribeLocalEvent<ZombieBlobComponent, InhaleLocationEvent>(OnInhale);
         SubscribeLocalEvent<ZombieBlobComponent, ExhaleLocationEvent>(OnExhale);
 
@@ -100,6 +103,17 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
         }
     }
 
+    /// <summary>
+    /// Blob zombies are immune to pressure for as long as they are zombies.
+    /// </summary>
+    private void OnRefreshPressureImmunity(Entity<ZombieBlobComponent> ent, ref RefreshPressureImmunityEvent args)
+    {
+        if (ent.Comp.LifeStage >= ComponentLifeStage.Stopping)
+            return;
+
+        args.IsImmune = true;
+    }
+
     private void OnStartup(EntityUid uid, ZombieBlobComponent component, ComponentStartup args)
     {
         _ui.CloseUis(uid);
@@ -124,7 +138,7 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
 
         _tagSystem.AddTag(uid, "BlobMob");
 
-        EnsureComp<PressureImmunityComponent>(uid);
+        _barotrauma.RefreshPressureImmunity(uid);
 
         if (TryComp<TemperatureDamageComponent>(uid, out var temperatureDamageComponent))
         {
@@ -160,7 +174,6 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
             var htn = EnsureComp<HTNComponent>(uid);
             htn.RootTask = new HTNCompoundTask() {Task = "SimpleHostileCompound"};
             htn.Blackboard.SetValue(NPCBlackboard.Owner, uid);
-            htn.Blackboard.SetValue(NPCBlackboard.NavBlob, true);
 
             if (!HasComp<ActorComponent>(component.BlobPodUid))
             {
@@ -181,7 +194,7 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
         RemComp<BlobSpeakComponent>(uid);
         RemComp<BlobMobComponent>(uid);
         RemComp<HTNComponent>(uid);
-        RemComp<PressureImmunityComponent>(uid);
+        _barotrauma.RefreshPressureImmunity(uid);
 
         if (TryComp<TemperatureDamageComponent>(uid, out var temperatureDamageComponent) && component.OldColdDamageThreshold != null)
         {

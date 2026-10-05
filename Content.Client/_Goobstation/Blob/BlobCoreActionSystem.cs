@@ -9,7 +9,7 @@ namespace Content.Client._Goobstation.Blob;
 
 public sealed class BlobCoreActionSystem : SharedBlobCoreActionSystem
 {
-    [Dependency] private readonly MeleeWeaponSystem _meleeWeaponSystem = default!;
+    [Dependency] private MeleeWeaponSystem _meleeWeaponSystem = default!;
 
     public override void Initialize()
     {
@@ -25,6 +25,6 @@ public sealed class BlobCoreActionSystem : SharedBlobCoreActionSystem
         if(!TryGetEntity(ev.BlobEntity, out var user))
             return;
 
-        _meleeWeaponSystem.DoLunge(user.Value, user.Value, Angle.Zero, ev.Position, Animation, Angle.Zero, false);
+        _meleeWeaponSystem.DoLunge(user.Value, user.Value, Angle.Zero, ev.Position, Animation, false);
     }
 }

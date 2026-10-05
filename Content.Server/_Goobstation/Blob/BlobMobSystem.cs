@@ -12,8 +12,8 @@ namespace Content.Server._Goobstation.Blob;
 
 public sealed class BlobMobSystem : SharedBlobMobSystem
 {
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly ReplacementAccentSystem _accent = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private ReplacementAccentSystem _accent = default!;
 
     public override void Initialize()
     {

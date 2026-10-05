@@ -10,15 +10,16 @@
     - Zombie
     - Dragon
     - Revolutionary
-    - Changeling
-    - Heretic
     - Wizard
 
 - type: explosion
   id: Blob
   damagePerIntensity:
-    groups:
-      Brute: 10
+    # Goob used "groups: Brute: 10"; upstream explosions take damage types, so split evenly over Brute.
+    types:
+      Blunt: 3.34
+      Slash: 3.33
+      Piercing: 3.33
   tileBreakChance: [0]
   tileBreakIntensity: [0]
   lightColor: Red
@@ -49,7 +50,7 @@
       description: blob-carrier-role-desc
       rules: blob-carrier-role-rules
       mindRoles:
-      - MindRoleGhostRoleSoloAntagonistGoob
+      - MindRoleGhostRoleSoloAntagonist
       raffle:
         settings: default
     - type: Sprite

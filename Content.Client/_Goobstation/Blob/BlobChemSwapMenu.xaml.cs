@@ -15,12 +15,12 @@ namespace Content.Client._Goobstation.Blob;
 [GenerateTypedNameReferences]
 public sealed partial class BlobChemSwapMenu : DefaultWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
     private readonly SpriteSystem _sprite;
     public event Action<BlobChemType>? OnIdSelected;
 
-    private Shared.Blob.BlobChemColors _possibleChems = new();
+    private Content.Shared._Goobstation.Blob.BlobChemColors _possibleChems = new();
     private BlobChemType _selectedId;
 
     public BlobChemSwapMenu()
@@ -30,7 +30,7 @@ public sealed partial class BlobChemSwapMenu : DefaultWindow
         _sprite = _entityManager.System<SpriteSystem>();
     }
 
-    public void UpdateState(Shared.Blob.BlobChemColors chemList, BlobChemType selectedChem)
+    public void UpdateState(Content.Shared._Goobstation.Blob.BlobChemColors chemList, BlobChemType selectedChem)
     {
         _possibleChems = chemList;
         _selectedId = selectedChem;

@@ -1,12 +1,16 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+- type: objectiveIssuer
+  id: Blob
+  name: objective-issuer-blob
+
 - type: entity
   abstract: true
   parent: BaseObjective
   id: BaseBlobObjective
   components:
   - type: Objective
-    issuer: objective-issuer-blob
+    issuer: Blob
     unique: true
     difficulty: 1
     icon:

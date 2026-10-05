@@ -19,8 +19,9 @@
           - ReagentId: TearGas
             Quantity: 3
     - type: Damageable
-      damageContainer: Blob
       damageModifierSet: BlobMob
+    - type: Injurable
+      damageContainer: Blob
     - type: Clothing
       quickEquip: false
       sprite: _Goobstation/Blob/Mobs/blob_mobs.rsi
@@ -53,9 +54,6 @@
     - type: HTN
       rootTask:
         task: BlobPodCompound
-      blackboard:
-        NavBlob: !type:Bool
-          true
     - type: BlobMob
     - type: BlobSpeak
     - type: CombatMode
@@ -119,8 +117,9 @@
   components:
     - type: ZombieImmune
     - type: Damageable
-      damageContainer: Blob
       damageModifierSet: BlobBlobbernaut
+    - type: Injurable
+      damageContainer: Blob
     - type: Tag
       tags:
         - Blobbernaut
@@ -205,9 +204,6 @@
           state: nautdamage
           shader: unshaded
     - type: NightVision
-      color: "#808080"
-      activateSound: null
-      deactivateSound: null
     - type: GuideHelp
       guides:
       - Blob
@@ -249,7 +245,7 @@
       description: ghost-role-information-blob-description
       rules: You are an antagonist, destroy the station!
       mindRoles:
-      - MindRoleGhostRoleSoloAntagonistGoob
+      - MindRoleGhostRoleSoloAntagonist
     - type: GhostTakeoverAvailable
     - type: Fixtures
       fixtures:

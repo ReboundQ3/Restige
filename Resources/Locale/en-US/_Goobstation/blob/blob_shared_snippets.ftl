@@ -3,3 +3,7 @@ terror-blob = Attention crew, it appears that someone on your station has made a
 dynamic-gamerule-midround-blob-title = Blob Spawn (Blob)
 chat-radio-blobmind = Blobmind
 role-subtype-blob = Blob
+
+# Strings the port needs that Goob keeps outside the blob locale (or that upstream now requires as loc IDs).
+speak-vv-blob = Blob
+location-blob-core = blob core

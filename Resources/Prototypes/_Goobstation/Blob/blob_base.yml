@@ -30,14 +30,14 @@
       sprite: Effects/fire.rsi
       normalState: 1
     - type: Damageable
-      damageContainer: Blob
       damageModifierSet: BaseBlob
+    - type: Injurable
+      damageContainer: Blob
     - type: Appearance
     - type: Physics
     - type: Clickable
     - type: Transform
       anchored: true
-    - type: BlockTeleport
     - type: Fixtures
       fixtures:
         fix1:

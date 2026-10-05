@@ -19,9 +19,9 @@ namespace Content.Server._Goobstation.Blob;
 
 public sealed class BlobFactorySystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
 
     public override void Initialize()
@@ -87,8 +87,6 @@ public sealed class BlobFactorySystem : EntitySystem
 
     private static readonly ProtoId<ReagentPrototype> ChloralHydrate = "ChloralHydrate";
 
-    private static readonly ProtoId<ReagentPrototype> Profanol = "Profanol";
-
     private static readonly ProtoId<ReagentPrototype> PolytrinicAcid = "PolytrinicAcid";
 
     private static readonly ProtoId<ReagentPrototype> Ipecac = "Ipecac";
@@ -140,7 +138,6 @@ public sealed class BlobFactorySystem : EntitySystem
                 break;
             case BlobChemType.SinewyTendons:
                 blobGas.AddSolution(new Solution(Ipecac, FixedPoint2.New(15)),_prototypeManager);
-                blobGas.AddSolution(new Solution(Profanol, FixedPoint2.New(15)),_prototypeManager);
                 break;
             case BlobChemType.CorrosiveSlime:
                 blobGas.AddSolution(new Solution(PolytrinicAcid, FixedPoint2.New(30)),_prototypeManager);

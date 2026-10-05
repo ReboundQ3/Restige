@@ -13,20 +13,21 @@ using Content.Shared.Weapons.Melee.Events;
 using Robust.Server.GameObjects;
 using Robust.Shared.Random;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Explosion;
 
 namespace Content.Server._Goobstation.Blob;
 
 public sealed class BlobbernautSystem : SharedBlobbernautSystem
 {
-    [Dependency] private readonly EntityLookupSystem _entityLookupSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+    [Dependency] private EntityLookupSystem _entityLookupSystem = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
 
-    [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly EmpSystem _empSystem = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private ExplosionSystem _explosionSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private EmpSystem _empSystem = default!;
+    [Dependency] private MobStateSystem _mobStateSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private TransformSystem _transform = default!;
     //private EntityQuery<MapGridComponent> _mapGridQuery;
     private EntityQuery<BlobTileComponent> _tileQuery;
     private EntityQuery<BlobCoreComponent> _coreQuery;
@@ -35,6 +36,7 @@ public sealed class BlobbernautSystem : SharedBlobbernautSystem
     {
         base.Initialize();
         SubscribeLocalEvent<BlobbernautComponent, MeleeHitEvent>(OnMeleeHit);
+        SubscribeLocalEvent<BlobbernautComponent, GetExplosionResistanceEvent>(OnGetExplosionResistance);
 
         //_mapGridQuery = GetEntityQuery<MapGridComponent>();
         _tileQuery = GetEntityQuery<BlobTileComponent>();
@@ -85,6 +87,18 @@ public sealed class BlobbernautSystem : SharedBlobbernautSystem
         }
     }
 
+    /// <summary>
+    /// Blobbernauts share their blob's Explosive Lattice immunity, through the factory that made them.
+    /// </summary>
+    private void OnGetExplosionResistance(Entity<BlobbernautComponent> ent, ref GetExplosionResistanceEvent args)
+    {
+        if (!TryComp<BlobTileComponent>(ent.Comp.Factory, out var factoryTile))
+            return;
+
+        if (factoryTile.Core?.Comp.CurrentChem == BlobChemType.ExplosiveLattice)
+            args.DamageCoefficient = 0f;
+    }
+
     private void OnMeleeHit(EntityUid uid, BlobbernautComponent component, MeleeHitEvent args)
     {
         if (args.HitEntities.Count < 1)
@@ -116,9 +130,9 @@ public sealed class BlobbernautSystem : SharedBlobbernautSystem
         }
     }
 
-    private DamageSpecifier? TryChangeDamage(string msg, EntityUid ent, DamageSpecifier dmg)
+    private void TryChangeDamage(string msg, EntityUid ent, DamageSpecifier dmg)
     {
         _popup.PopupEntity(Loc.GetString(msg), ent, ent, PopupType.LargeCaution);
-        return _damageableSystem.TryChangeDamage(ent, dmg);
+        _damageableSystem.TryChangeDamage(ent, dmg);
     }
 }

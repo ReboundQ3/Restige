@@ -25,20 +25,21 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Explosion;
 
 namespace Content.Server._Goobstation.Blob;
 
 public sealed class BlobTileSystem : SharedBlobTileSystem
 {
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly BlobCoreSystem _blobCoreSystem = default!;
-    [Dependency] private readonly BlobCoreActionSystem _blobCoreActionSystem = default!;
-    [Dependency] private readonly AudioSystem _audioSystem = default!;
-    [Dependency] private readonly EmpSystem _empSystem = default!;
-    [Dependency] private readonly MapSystem _mapSystem = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFactionSystem = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private BlobCoreSystem _blobCoreSystem = default!;
+    [Dependency] private BlobCoreActionSystem _blobCoreActionSystem = default!;
+    [Dependency] private AudioSystem _audioSystem = default!;
+    [Dependency] private EmpSystem _empSystem = default!;
+    [Dependency] private MapSystem _mapSystem = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private NpcFactionSystem _npcFactionSystem = default!;
 
     private EntityQuery<BlobCoreComponent> _blobCoreQuery;
     private EntityQuery<BlobTileComponent> _tileQuery;
@@ -54,6 +55,7 @@ public sealed class BlobTileSystem : SharedBlobTileSystem
         SubscribeLocalEvent<BlobTileComponent, DestructionEventArgs>(OnDestruction);
         SubscribeLocalEvent<BlobTileComponent, BlobTileGetPulseEvent>(OnPulsed);
         SubscribeLocalEvent<BlobTileComponent, EntityTerminatingEvent>(OnTerminate);
+        SubscribeLocalEvent<BlobTileComponent, GetExplosionResistanceEvent>(OnGetExplosionResistance);
 
         _blobCoreQuery = GetEntityQuery<BlobCoreComponent>();
         _tileQuery = GetEntityQuery<BlobTileComponent>();
@@ -102,6 +104,19 @@ public sealed class BlobTileSystem : SharedBlobTileSystem
         Vector2i.Right,
     };
 
+    /// <summary>
+    /// Explosive Lattice makes the blob immune to explosions while it is the active chem.
+    /// Reflective tiles keep their own resistances, like they do for the other chem effects.
+    /// </summary>
+    private void OnGetExplosionResistance(Entity<BlobTileComponent> ent, ref GetExplosionResistanceEvent args)
+    {
+        if (ent.Comp.BlobTileType == BlobTileType.Reflective)
+            return;
+
+        if (ent.Comp.Core?.Comp.CurrentChem == BlobChemType.ExplosiveLattice)
+            args.DamageCoefficient = 0f;
+    }
+
     private void OnPulsed(EntityUid uid, BlobTileComponent component, BlobTileGetPulseEvent args)
     {
         if (args.Handled
@@ -143,7 +158,7 @@ public sealed class BlobTileSystem : SharedBlobTileSystem
             healCore.DamageDict.TryAdd(keyValuePair.Key, keyValuePair.Value * 5);
         }
 
-        _damageableSystem.TryChangeDamage(ent, healCore);
+        _damageableSystem.TryChangeDamage(ent.Owner, healCore);
     }
 
     private bool CheckTile(

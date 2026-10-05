@@ -37,25 +37,26 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.AlertLevel;
+using Content.Shared.Damage.Components;
 
 namespace Content.Server._Goobstation.Blob;
 
 public sealed class BlobCoreSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly AlertLevelSystem _alertLevelSystem = default!;
-    [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;
-    [Dependency] private readonly MetaDataSystem _metaDataSystem = default!;
-    [Dependency] private readonly ActionsSystem _action = default!;
-    [Dependency] private readonly MapSystem _mapSystem = default!;
-    [Dependency] private readonly StoreSystem _storeSystem = default!;
-    [Dependency] private readonly BlobTileSystem _blobTile = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ExplosionSystem _explosionSystem = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private AlertLevelSystem _alertLevelSystem = default!;
+    [Dependency] private RoundEndSystem _roundEndSystem = default!;
+    [Dependency] private MetaDataSystem _metaDataSystem = default!;
+    [Dependency] private ActionsSystem _action = default!;
+    [Dependency] private MapSystem _mapSystem = default!;
+    [Dependency] private StoreSystem _storeSystem = default!;
+    [Dependency] private BlobTileSystem _blobTile = default!;
 
     private EntityQuery<BlobTileComponent> _tile;
     private EntityQuery<BlobFactoryComponent> _factory;
@@ -251,7 +252,7 @@ public sealed class BlobCoreSystem : EntitySystem
         if (!TryComp<DamageableComponent>(core.Owner, out var damageComp))
             return;
 
-        var currentHealth = component.CoreBlobTotalHealth - damageComp.TotalDamage;
+        var currentHealth = component.CoreBlobTotalHealth - _damageable.GetTotalDamage((core.Owner, damageComp));
         var healthSeverity = (short) Math.Clamp(Math.Round(currentHealth.Float() / 20f), 0, 20);
 
         _alerts.ShowAlert(component.Observer.Value, BlobHealth, healthSeverity);
@@ -325,7 +326,6 @@ public sealed class BlobCoreSystem : EntitySystem
         {
             case BlobChemType.ExplosiveLattice:
                 _damageable.SetDamageModifierSetId(uid, "ExplosiveLatticeBlob");
-                _explosionSystem.SetExplosionResistance(uid, 0f, EnsureComp<ExplosionResistanceComponent>(uid));
                 break;
             case BlobChemType.ElectromagneticWeb:
                 _damageable.SetDamageModifierSetId(uid, "ElectromagneticWebBlob");
@@ -575,7 +575,7 @@ public sealed class BlobCoreSystem : EntitySystem
                 if(stationUid != null)
                     _alertLevelSystem.SetLevel(stationUid.Value, "green", true, true, true);
 
-                _roundEndSystem.CancelRoundEndCountdown(null, false);
+                _roundEndSystem.CancelRoundEndCountdown(forceRecall: true);
                 blobRuleComp.Stage = BlobStage.Default;
             }
         }
@@ -634,7 +634,7 @@ public sealed class BlobCoreSystem : EntitySystem
         if (!_pointsChange.TryEnterWriteLock(1000))
             return false;
 
-        if (_storeSystem.TryAddCurrency(new Dictionary<string, FixedPoint2>
+        if (_storeSystem.TryAddCurrency(new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>
                 {
                     { BlobMoney, amount }
                 },

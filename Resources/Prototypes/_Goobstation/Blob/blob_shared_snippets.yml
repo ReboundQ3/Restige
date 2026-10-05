@@ -8,8 +8,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: BlobRule
-  - type: GameRule
-    chaosScore: 1000
 
 - type: entity
   id: BlobGameMode
@@ -19,23 +17,29 @@
   - type: BlobRule
   - type: GameRule
     minPlayers: 20
-    chaosScore: 1000
   - type: AntagSelection
-    selectionTime: IntraPlayerSpawn
-    definitions:
-    - prefRoles: [ Blob ]
-      allowNonHumans: true
-      jobBlacklist: [ Chaplain ] # Goobstation
-      blacklist:
-        components:
-        - CommandStaff
-        - AntagImmune
-      briefing:
-        text: blob-carrier-role-greeting
-        color: Plum
-        sound: /Audio/Announcements/bloblarm.ogg
-      mindRoles:
-      - MindRoleBlob
+    selectionTime: JobsAssigned
+    antags:
+    - !type:LinearAntagCount
+      proto: Blob
+      range:
+        min: 1
+        max: 1
+
+# Goob's inline AntagSelection definition, as an upstream antag specifier.
+# CommandBlacklistedAntag also blacklists AntagImmune, like Goob's version did.
+- type: antagSpecifier
+  parent: [ CommandBlacklistedAntag, CyborgBlacklistedAntag ]
+  id: Blob
+  prefRoles: [ Blob ]
+  allowNonHumans: true
+  jobBlacklist: [ Chaplain ]
+  briefing:
+    text: blob-carrier-role-greeting
+    color: Plum
+    sound: /Audio/Announcements/bloblarm.ogg
+  mindRoles:
+  - MindRoleBlob
 
 - type: entity
   id: BlobSpawn
@@ -48,13 +52,6 @@
     earliestStart: 50
     minimumPlayers: 20
     maxOccurrences: 2
-    chaos:
-      Hostile: 200
-      Death: 300
-      Medical: 200
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 1000
   - type: BlobSpawnRule
     carrierBlobProtos:
     - SpawnPointGhostBlobRat
@@ -72,21 +69,11 @@
     minimumPlayers: 50
     duration: null
     maxOccurrences: 1
-    chaos:
-      Hostile: 400
-      Medical: 400
-      Death: 400
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 1100
   - type: BlobSpawnRule
     carrierBlobProtos:
     - SpawnPointGhostBlobRat
     playersPerCarrierBlob: 30
     maxCarrierBlob: 1
-  - type: Tag
-    tags:
-      - MidroundAntag
 
 # --- from _Goobstation/game_presets.yml
 - type: gamePreset
@@ -99,7 +86,6 @@
   rules:
   - BlobGameMode
   - BasicStationEventScheduler
-  - AntagStationEventScheduler
   - BasicRoundstartVariation
   - SubGamemodesRule
 
@@ -112,13 +98,46 @@
 
 # --- from _Goobstation/Damage/modifier_sets.yml
 - type: damageModifierSet
+  id: BaseBlob # ReactiveSpines
+  coefficients:
+    Blunt: 0.35 # little debuff (0.25 -> 0.35)
+    Slash: 0.35
+    Piercing: 0.35
+    Heat: 2.00
+
+- type: damageModifierSet
+  id: ElectromagneticWebBlob # Electromagnetic Web
+  coefficients:
+    Blunt: 0.40 # little buff (0.50 -> 0.40)
+    Slash: 0.40
+    Piercing: 0.40
+    Heat: 2.50
+    Shock: 0.50
+
+- type: damageModifierSet
+  id: ExplosiveLatticeBlob # Explosive Lattice
+  coefficients:
+    Blunt: 0.25
+    Slash: 0.25
+    Piercing: 0.25
+    Heat: 3.00
+    Shock: 1.50
+
+- type: damageModifierSet
+  id: ChainCoatingBlob # Chain coating
+  coefficients:
+    Blunt: 0.20
+    Slash: 0.20
+    Piercing: 0.20
+    Heat: 1.5
+
+- type: damageModifierSet
   id: SinewyTendonsBlob # Flesh grill
   coefficients:
     Blunt: 0.50
     Slash: 0.50
     Piercing: 0.20
     Heat: 5
-  ignoreArmorPierceFlags: All
 
 - type: damageModifierSet
   id: BlobBlobbernautChainCoating
@@ -127,7 +146,6 @@
     Slash: 0.25
     Piercing: 0.25
     Heat: 1.2
-  ignoreArmorPierceFlags: All
 
 - type: damageModifierSet
   id: BlobMob # Blob mobs
@@ -136,7 +154,6 @@
     Slash: 1
     Piercing: 1
     Heat: 1.5
-  ignoreArmorPierceFlags: All
 
 - type: damageModifierSet
   id: BlobBlobbernaut
@@ -145,7 +162,6 @@
     Slash: 0.5
     Piercing: 0.5
     Heat: 1.5
-  ignoreArmorPierceFlags: All
 
 - type: damageModifierSet
   id: BlobReflective # If it reflects lasers, then it must be fragile?
@@ -154,7 +170,6 @@
     Slash: 0.9
     Piercing: 0.9
     Heat: 1.5
-  ignoreArmorPierceFlags: All
 
 # --- from _Goobstation/tags.yml
 - type: Tag
