@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2026 Sector-Vestige contributors
-// SPDX-FileCopyrightText: 2026 Sector Vestige contributors (modifications)
-// SPDX-FileCopyrightText: 2026 ReboundQ3 <22770594+ReboundQ3@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using Content.Shared._SV.CCVar;
@@ -119,7 +113,7 @@ public sealed partial class SponsorManager
 
     /// <summary>
     /// Hot path. Dictionary lookup + prototype index lookup, nothing else.
-    /// Returns true and the OOC colour hex (e.g. "#F0DFA6") if the user is a patron.
+    /// Returns true and the OOC colour hex (e.g. "#C27C0E") if the user is a patron.
     /// </summary>
     public bool TryGetOocColor(NetUserId user, [NotNullWhen(true)] out string? color)
     {
