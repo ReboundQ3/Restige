@@ -2097,3 +2097,13 @@ Entries:
       message: Disabled the Upstream-Patreon OOC colors.
   id: 297
   time: '2026-10-10T17:04:23.0000000+00:00'
+- author: purpleskittleo
+  changes:
+    - type: Add
+      message: Added one new music track.
+    - type: Add
+      message: Added one new stinger.
+    - type: Add
+      message: Added two new announcement variants.
+  id: 298
+  time: '2026-10-10T17:34:29.0000000+00:00'
