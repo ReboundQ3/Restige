@@ -72,7 +72,7 @@ internal static class ServerContentIoC
         deps.Register<ISharedPlaytimeManager, PlayTimeTrackingManager>();
         deps.Register<ServerApi>();
         deps.Register<JobWhitelistManager>();
-        deps.Register<SponsorManager>();
+        deps.Register<SponsorManager>(); // SV changes - Sponsor/patron entitlement manager
         deps.Register<PlayerRateLimitManager>();
         deps.Register<SharedPlayerRateLimitManager, PlayerRateLimitManager>();
         deps.Register<MappingManager>();
