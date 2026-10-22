@@ -77,6 +77,7 @@ namespace Content.Client.Cargo.UI
                     ("color", accountProto.Color),
                     ("name", Loc.GetString(accountProto.Name)),
                     ("code", Loc.GetString(accountProto.Code)));
+                // SV - End change
             }
 
             TabContainer.SetTabTitle(0, Loc.GetString("cargo-console-menu-tab-title-orders"));
@@ -139,8 +140,10 @@ namespace Content.Client.Cargo.UI
                     if (!allowedGroups?.Contains(cargoPrototype.Group) ?? false)
                         continue;
 
+                    // SV - Needed for Licence code to make certain things invisible
                     if (!cargoPrototype.Visible)
                         continue;
+                    // SV - end of change
 
                     yield return cargoPrototype;
                 }
