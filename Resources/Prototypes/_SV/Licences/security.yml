@@ -1,0 +1,13 @@
+- type: licence
+  id: t1_armory
+  name: "Paramillitairy Licence"
+  icon:
+    sprite: Objects/Misc/bureaucracy.rsi
+    state: paper
+  description: "Get access to Paramillitairy weaponry"
+  products:
+  - SVAtmosphericsAir
+  - SVAtmosphericsOxygen
+  - SVAtmosphericsNitrogen
+  - SVAtmosphericsCarbonDioxide
+  - SVAtmosphericsStorage

@@ -71,10 +71,17 @@ namespace Content.Client.Cargo.UI
                     ("color", accountProto.Color),
                     ("name", Loc.GetString(accountProto.Name)),
                     ("code", Loc.GetString(accountProto.Code)));
+
+                // SV - Adding a licencing tab
+                SVAccountNameLabel.Text = Loc.GetString("cargo-console-menu-account-name-format",
+                    ("color", accountProto.Color),
+                    ("name", Loc.GetString(accountProto.Name)),
+                    ("code", Loc.GetString(accountProto.Code)));
             }
 
             TabContainer.SetTabTitle(0, Loc.GetString("cargo-console-menu-tab-title-orders"));
             TabContainer.SetTabTitle(1, Loc.GetString("cargo-console-menu-tab-title-funds"));
+            TabContainer.SetTabTitle(2, Loc.GetString("sv-cargo-console-menu-tab-title-licences"));
 
             ActionOptions.OnItemSelected += idx =>
             {
@@ -130,6 +137,9 @@ namespace Content.Client.Cargo.UI
                     var cargoPrototype = _protoManager.Index(cargoPrototypeId);
 
                     if (!allowedGroups?.Contains(cargoPrototype.Group) ?? false)
+                        continue;
+
+                    if (!cargoPrototype.Visible)
                         continue;
 
                     yield return cargoPrototype;
