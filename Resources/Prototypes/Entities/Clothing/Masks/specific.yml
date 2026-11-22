@@ -5,6 +5,10 @@
   description: A face-covering mask that can be connected to an air supply.
   suffix: Chameleon
   components:
+    # SV: begin vision cones (ported from Trauma)
+    - type: ViewconeModifier
+      angleModifier: 1
+    # SV: end vision cones
     - type: Tag
       tags: [] # ignore "WhitelistChameleon" tag
     - type: Sprite

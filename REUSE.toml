@@ -159,6 +159,12 @@ precedence = "aggregate"
 SPDX-FileCopyrightText = ["2026 RMC14 contributors", "2026 Sector Vestige contributors (modifications)"]
 SPDX-License-Identifier = "MIT"
 
+[[annotations]]
+path = "**/_Trauma/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = ["2026 Trauma Station contributors", "2026 Sector Vestige contributors (modifications)"]
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
 # ---------------------------------------------------------------------------
 # Sector Vestige original content (AGPL)
 # ---------------------------------------------------------------------------
@@ -180,3 +186,11 @@ path = "Resources/Textures/**"
 precedence = "aggregate"
 SPDX-FileCopyrightText = ["SS14, fork and Sector Vestige contributors (see meta.json in each folder)"]
 SPDX-License-Identifier = "CC-BY-SA-3.0"
+
+# Shaders are code, not art, so they keep their fork's code license instead of
+# the texture license above. Must stay after the Textures table.
+[[annotations]]
+path = "Resources/Textures/_Trauma/Shaders/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = ["2026 Trauma Station contributors", "2026 Sector Vestige contributors (modifications)"]
+SPDX-License-Identifier = "AGPL-3.0-or-later"

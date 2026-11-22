@@ -72,6 +72,10 @@
   id: MobDiona
   name: Urist McPlants
   components:
+  # SV: begin vision cones (ported from Trauma)
+  - type: Viewcone
+    baseConeAngle: 360 # diona see all around them
+  # SV: end vision cones
   - type: Respirator
     damage:
       types:

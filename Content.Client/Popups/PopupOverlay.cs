@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._Trauma.Popups; // SV: viewcone popup hiding (ported from Trauma)
 using Content.Shared.Examine;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -88,6 +89,16 @@ public sealed class PopupOverlay : Overlay
 
             if (mapPos.MapId != args.MapId)
                 continue;
+
+            // SV: begin hide popups outside your vision cone (ported from Trauma)
+            if (ourEntity != null)
+            {
+                var ev = new ShowPopupAttemptEvent(mapPos.Position, ourPos);
+                _entManager.EventBus.RaiseLocalEvent(ourEntity.Value, ref ev);
+                if (ev.Cancelled)
+                    continue;
+            }
+            // SV: end hide popups outside your vision cone
 
             var distance = (mapPos.Position - ourPos).Length();
 

@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingMaskPullableBase
+  parent: [ ClothingMaskPullableBase, BaseClothingViewconeSmall ] # SV: vision cones (ported from Trauma), was ClothingMaskPullableBase
   id: ClothingMaskGas
   name: gas mask
   description: A face-covering mask that can be connected to an air supply.
@@ -26,6 +26,10 @@
   name: security gas mask
   description: A standard issue Security gas mask.
   components:
+  # SV: begin vision cones (ported from Trauma)
+  - type: ViewconeModifier
+    angleModifier: 1.0
+  # SV: end vision cones
   - type: Item
     size: Tiny
   - type: Sprite
@@ -46,6 +50,10 @@
   name: syndicate gas mask
   description: A close-fitting tactical mask that can be connected to an air supply.
   components:
+  # SV: begin vision cones (ported from Trauma)
+  - type: ViewconeModifier
+    angleModifier: 1.0
+  # SV: end vision cones
   - type: Sprite
     sprite: Clothing/Mask/gassyndicate.rsi
   - type: Clothing
@@ -107,6 +115,10 @@
   name: explorer gas mask
   description: A military-grade gas mask that can be connected to an air supply.
   components:
+  # SV: begin vision cones (ported from Trauma)
+  - type: ViewconeModifier
+    angleModifier: 0.90
+  # SV: end vision cones
   - type: Sprite
     sprite: Clothing/Mask/gasexplorer.rsi
   - type: Clothing
@@ -406,6 +418,10 @@
   name: mercenary gas mask
   description: Slightly outdated, but reliable military-style gas mask.
   components:
+  # SV: begin vision cones (ported from Trauma)
+  - type: ViewconeModifier
+    angleModifier: 0.90
+  # SV: end vision cones
   - type: Sprite
     sprite: Clothing/Mask/merc.rsi
   - type: Clothing
@@ -424,6 +440,10 @@
   name: ERT gas mask
   description: The gas mask of the elite squad of the ERT.
   components:
+  # SV: begin vision cones (ported from Trauma)
+  - type: ViewconeModifier
+    angleModifier: 1.0
+  # SV: end vision cones
   - type: Sprite
     sprite: Clothing/Mask/ert.rsi
   - type: Clothing
@@ -452,6 +472,10 @@
   name: death squad gas mask
   description: A unique gas mask for the NT's most elite squad.
   components:
+  # SV: begin vision cones (ported from Trauma)
+  - type: ViewconeModifier
+    angleModifier: 1.5
+  # SV: end vision cones
   - type: Sprite
     sprite: Clothing/Mask/squadron.rsi
   - type: Clothing
@@ -708,6 +732,10 @@
   name: welding gas mask
   description: A gas mask with built in welding goggles and face shield. Looks like a skull, clearly designed by a nerd.
   components:
+  # SV: begin vision cones (ported from Trauma)
+  - type: ViewconeModifier
+    angleModifier: 0.85 # gas mask value, not the welding mask one
+  # SV: end vision cones
   - type: Sprite
     sprite: Clothing/Mask/welding-gas.rsi
     state: icon

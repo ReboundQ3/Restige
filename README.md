@@ -78,6 +78,7 @@ Code ported from other forks lives in its own folder and keeps its original lice
 | Funkystation | `_Funkystation/` | AGPL-3.0-or-later | [GitHub](https://github.com/funky-station/funky-station) |
 | Moffstation | `_Moffstation/` | MIT | [GitHub](https://github.com/moff-station/moff-station-14) |
 | RMC14 | `_RMC14/` | MIT | [GitHub](https://github.com/RMC-14/RMC-14) |
+| Trauma Station | `_Trauma/` | AGPL-3.0-or-later | [GitHub](https://github.com/Trauma-Station/Trauma-Station) |
 
 `REUSE.toml` has the full per-folder mapping. CI runs `reuse lint` plus `Tools/reuse_check.py`, which verifies that the license REUSE computes for every `_SV/` and fork file is the one intended.
 

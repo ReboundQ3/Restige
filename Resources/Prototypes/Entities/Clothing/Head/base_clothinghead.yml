@@ -115,7 +115,7 @@
 
 - type: entity
   abstract: true
-  parent: [ ClothingHeadBase, TemperatureProtection ]
+  parent: [ ClothingHeadBase, TemperatureProtection, BaseClothingViewconeSmall ] # SV: vision cones (ported from Trauma), was [ ClothingHeadBase, TemperatureProtection ]
   id: ClothingHeadEVAHelmetBase
   name: base space helmet
   components:
@@ -150,7 +150,7 @@
 
 - type: entity
   abstract: true
-  parent: TemperatureProtection
+  parent: [ TemperatureProtection, BaseClothingViewconeSmall ] # SV: vision cones (ported from Trauma), was TemperatureProtection
   id: ClothingHeadHardsuitBase
   name: base hardsuit helmet
   categories: [ HideSpawnMenu ]

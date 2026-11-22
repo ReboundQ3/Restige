@@ -235,6 +235,10 @@
   parent: [ OrganArachnidVisual, OrganBaseEyes, OrganArachnidInternal ]
   id: OrganArachnidEyes
   components:
+  # SV: begin vision cones (ported from Trauma)
+  - type: ViewconeModifier
+    angleModifier: 1.25 # 8 eyes are better than 2
+  # SV: end vision cones
   - type: Appearance
   - type: EyeBlinking
     eyelidsSprite: /Textures/Mobs/Species/Arachnid/parts.rsi

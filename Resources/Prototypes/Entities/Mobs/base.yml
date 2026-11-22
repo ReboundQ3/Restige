@@ -4,6 +4,12 @@
   save: false
   id: BaseControllable
   components:
+  # SV: begin vision cones (ported from Trauma)
+  - type: Viewcone
+  - type: ViewconeOccludable # if it can move, you probably can't remember it forever?
+    useMemory: false
+  - type: ViewconeFootstepsEffect # if you can hear it move you will see steps effects on screen
+  # SV: end vision cones
   - type: Sprite
     noRot: true
     drawdepth: Mobs
@@ -172,6 +178,7 @@
   id: MobCombat
   abstract: true
   components:
+  - type: ViewconeMeleeEffect # SV: vision cones (ported from Trauma)
   - type: CombatMode
   - type: MeleeWeapon
     hidden: true

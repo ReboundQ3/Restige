@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingHeadBase
+  parent: [ ClothingHeadBase, BaseClothingViewconeLarge ] # SV: vision cones (ported from Trauma), was ClothingHeadBase
   id: WeldingMaskBase
   name: welding mask
   abstract: true

@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._Trauma.Movement; // SV: viewcone footstep effects (ported from Trauma)
 using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.CCVar;
@@ -362,6 +363,11 @@ public abstract partial class SharedMoverController : VirtualController
                 {
                     _audio.PlayPredicted(sound, uid, uid, audioParams);
                 }
+
+                // SV: begin viewcone footstep effects (ported from Trauma)
+                var stepEv = new FootStepEvent(uid, wishDir.ToWorldAngle());
+                RaiseLocalEvent(uid, ref stepEv);
+                // SV: end viewcone footstep effects
             }
         }
     }

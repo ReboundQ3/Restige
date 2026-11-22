@@ -33,6 +33,10 @@
   parent: BaseStructure
   abstract: true
   components:
+  # SV: begin vision cones (ported from Trauma)
+  - type: ViewconeOccludable
+    occludeIfAnchored: false # dont want someone to get doxxed by a canister they're dragging visibly moving outside your vision
+  # SV: end vision cones
 # These might/might not be a good idea
 #  - type: MovedByPressure
 #  - type: DamageOnHighSpeedImpact

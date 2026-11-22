@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ ClothingEyesBase, BaseClothingViewconeBlinding ] # SV: vision cones (ported from Trauma), was ClothingEyesBase
   id: ClothingEyesBlindfold
   name: blindfold
   description: The bind leading the blind.

@@ -1,5 +1,6 @@
 #nullable enable
 using Content.Shared.CCVar;
+using Content.Shared._Trauma.CCVar; // SV: vision cones (ported from Trauma)
 
 namespace Content.IntegrationTests;
 
@@ -35,5 +36,6 @@ public static partial class PoolManager
         (CCVars.InteractionRateLimitPeriod.Name, "0.1"),
         (CCVars.MovementMobPushing.Name, "false"),
         (CCVars.ResourceUploadingStoreDeletionDays.Name, "0"),
+        (TraumaCVars.DisableVisionEffects.Name, "true"), // SV: viewcone effects spawn entities a lot, similar to audio entities which are ignored (ported from Trauma)
     };
 }

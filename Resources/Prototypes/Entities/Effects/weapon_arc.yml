@@ -3,6 +3,7 @@
   id: WeaponArcStatic
   categories: [ HideSpawnMenu ]
   components:
+    - type: ViewconeOccludable # SV: vision cones, they have their own viewcone effects (ported from Trauma)
     - type: TimedDespawn
       lifetime: 2.0
     - type: Sprite
@@ -20,6 +21,7 @@
   id: WeaponArcAnimated
   categories: [ HideSpawnMenu ]
   components:
+    - type: ViewconeOccludable # SV: vision cones (ported from Trauma)
     - type: Sprite
       sprite: Effects/arcs.rsi
       state: disarm

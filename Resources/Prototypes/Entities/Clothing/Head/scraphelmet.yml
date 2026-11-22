@@ -51,7 +51,7 @@
 
 # The helmet itself
 - type: entity
-  parent: [ClothingHeadHelmetBase, BaseMajorContraband]
+  parent: [ ClothingHeadHelmetBase, BaseMajorContraband, BaseClothingViewconeMedium ] # SV: vision cones (ported from Trauma), was [ClothingHeadHelmetBase, BaseMajorContraband]
   id: ClothingHeadHelmetScrap
   name: scrap helmet
   description: A cobbled-together helmet made from cabling, steel, and a bucket.

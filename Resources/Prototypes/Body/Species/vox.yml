@@ -336,6 +336,10 @@
   parent: [ OrganVoxVisual, OrganBaseEyes, OrganVoxInternal ]
   id: OrganVoxEyes
   components:
+  # SV: begin vision cones (ported from Trauma)
+  - type: ViewconeModifier
+    angleModifier: 1.1 # prey vision
+  # SV: end vision cones
   - type: EyeBlinking
     eyelidsSprite: /Textures/Mobs/Species/Vox/parts.rsi
   - type: Appearance

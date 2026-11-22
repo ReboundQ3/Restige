@@ -9,6 +9,10 @@
     snap:
     - Wallmount
   components:
+  # SV: begin vision cones (ported from Trauma)
+  - type: Viewcone
+    baseConeAngle: 360 # prevent camera vision being messed up
+  # SV: end vision cones
   - type: Transform
     anchored: true
   - type: Sprite

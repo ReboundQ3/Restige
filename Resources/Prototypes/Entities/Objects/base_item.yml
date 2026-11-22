@@ -3,6 +3,7 @@
   id: BaseItem
   name: "item"
   components:
+  - type: ViewconeOccludable # SV: vision cones, can't remember items that are out of view (ported from Trauma)
   - type: Item
     size: Small
   - type: Animateable

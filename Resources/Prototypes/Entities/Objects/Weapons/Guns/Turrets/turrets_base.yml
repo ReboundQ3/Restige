@@ -4,6 +4,10 @@
   id: BaseWeaponTurretIndestructible
   name: turret
   components:
+  # SV: begin vision cones (ported from Trauma)
+  - type: ViewconeOccludable
+    occludeIfAnchored: true
+  # SV: end vision cones
   - type: InteractionOutline
   - type: Actions
   - type: Fixtures
